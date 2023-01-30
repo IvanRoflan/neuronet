@@ -1,14 +1,46 @@
 
 package org.ael.nn.planform.core.neuron;
 
+import java.util.HashMap;
+import java.util.Map;
+
 
 public class Neuron {
     
     /**
-     * Поле инлентификатор нейрона
+     * Поле идентификатор нейрона
      */
     private  String uid;
-
+    
+    
+    /**
+     * Карта входных сигналов 
+     * 
+     *       иденттификатор  уровень сигнала
+     *             /         /  
+     */                        
+    private  Map<String, Double> inputSignals = new HashMap<>();
+    
+    
+    /**
+     * Уровень выходного сигнала нейрона 
+     */
+    private  Double output = 0.0;
+    
+    
+    /**
+     * Вычисление выхода 
+     */
+    public void  calculate()
+    {
+        inputSignals.forEach( (uid, signal) -> {
+        
+            
+        });
+        
+        
+    }
+    
     
     /**
      * Чтение поля uid
@@ -34,7 +66,10 @@ public class Neuron {
     }
     
     
-    
+    private Double sigmoid (Double x)
+    {
+        return x;        
+    }   
     
     
 }
