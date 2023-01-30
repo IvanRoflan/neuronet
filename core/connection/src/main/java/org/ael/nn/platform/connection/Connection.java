@@ -6,6 +6,11 @@ package org.ael.nn.platform.connection;
 public class Connection {
 
     /**
+     * Коэффциент передачи связи 
+     */
+    private Double coefficient;
+    
+    /**
      * Индетификатор нейрона входа
      */
      private String inputUid;
@@ -13,7 +18,7 @@ public class Connection {
     /**
      * Инддетификатор нейрона выхода
     */
- private String outputUid;
+    private String outputUid;
 
     public String getInputUid() {
         return inputUid;
