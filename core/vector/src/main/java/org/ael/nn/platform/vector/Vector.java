@@ -4,8 +4,8 @@
 
 package org.ael.nn.platform.vector;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 /**
@@ -15,7 +15,8 @@ import java.util.UUID;
 public class Vector {
     
     private String uid;
-    private List<Double> data = new ArrayList<>();
+    
+    private Map <String, Double> data = new HashMap<>();
     private int size = 0; 
     
     
@@ -28,7 +29,7 @@ public class Vector {
         {
             this.size = size;
             for (int i = 0; i < size; i++) {
-                data.add(Math.random() * 2 - 1);
+                data.put(UUID.randomUUID().toString(), (Double) Math.random() * 2 - 1 );                
             }            
         }
     }
@@ -41,14 +42,15 @@ public class Vector {
         this.uid = uid;
     }
 
-    public List<Double> getData() {
+    public Map<String, Double> getData() {
         return data;
     }
 
-    public void setData(List<Double> data) {
+    public void setData(Map<String, Double> data) {
         this.data = data;
     }
 
+   
     public int getSize() {
         return size;
     }
@@ -64,11 +66,10 @@ public class Vector {
         sb.append("[ ");
         if (data.size()>0)
         {
-            
-            for (int i = 0; i < data.size(); i++) {
-                sb.append(String.format("%7.4f", data.get(i) ));
-                sb.append(" ");
-            }            
+             data.forEach( (key,value) -> {
+                sb.append(String.format("%7.4f", value ));
+                sb.append(" ");             
+             });            
         }    
         sb.append("]");
         return sb.toString();
