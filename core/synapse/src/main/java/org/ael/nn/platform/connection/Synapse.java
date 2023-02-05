@@ -2,13 +2,22 @@
 
 package org.ael.nn.platform.connection;
 
+import java.util.UUID;
 
-public class Connection {
 
+public class Synapse {
+    
+    
+    
+    /**
+     * Идентификатор соединения 
+     */
+    private String uid;  
+    
     /**
      * Коэффциент передачи связи 
      */
-    private Double coefficient;
+    private Double w;
     
     /**
      * Индетификатор нейрона входа
@@ -19,6 +28,28 @@ public class Connection {
      * Инддетификатор нейрона выхода
     */
     private String outputUid;
+
+    
+    
+    public Synapse() {
+        this.uid = UUID.randomUUID().toString();
+    }
+
+    public String getUid() {
+        return uid;
+    }
+
+    public void setUid(String uid) {
+        this.uid = uid;
+    }
+
+    public Double getW() {
+        return w;
+    }
+
+    public void setW(Double w) {
+        this.w = w;
+    }
 
     public String getInputUid() {
         return inputUid;
@@ -35,13 +66,16 @@ public class Connection {
     public void setOutputUid(String outputUid) {
         this.outputUid = outputUid;
     }
+    
+    
+    
+  
+    
 
     @Override
     public String toString() {
-        return "Связь между нейронами {" + "inputUid=" + inputUid + ", outputUid=" + outputUid + '}';
+        return "синаптическая связь ==> " + "uid входного нейрона = " + inputUid + ", uid выходного нейрона =" + outputUid + '}';
     }
      
      
-     
-    
 }

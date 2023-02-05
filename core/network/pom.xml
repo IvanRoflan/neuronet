@@ -8,9 +8,28 @@
     </parent>
     <artifactId>network</artifactId>
     <packaging>jar</packaging>
+    
+    <dependencies>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>synapse</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>layer</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>neuron</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+    </dependencies>
+    
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
-        <maven.compiler.target>11</maven.compiler.target>
-        <exec.mainClass>org.vertexprize.bookkeeping.network.Network</exec.mainClass>
+        <maven.compiler.target>11</maven.compiler.target>       
     </properties>
+    
 </project>

@@ -5,12 +5,14 @@
 package org.ael.nn.planform.core.network;
 
 /**
- *
+ *  Нейронная сеть
+ * 
  * @author vaganovdv
  */
 public class Network {
 
-    public static void main(String[] args) {
-        System.out.println("Hello World!");
-    }
+    
+    
+    
+    
 }
