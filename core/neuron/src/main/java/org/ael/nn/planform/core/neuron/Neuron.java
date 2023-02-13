@@ -82,11 +82,11 @@ public class Neuron {
 
     @Override
     public String toString() {
-        return "Нейрон uid = " + uid + ", количество входных синапсов: [" + "]";
+        return "Нейрон uid = " + uid + ", количество входных синапсов: [" +synapses.size()+ "]";
     }
 
     /**
-     * Вычисление сигмоидальной функции
+     * Вычисление сигмоидальной функции активации
      *
      * @param x
      * @return

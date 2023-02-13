@@ -32,7 +32,9 @@ public class Synapse {
     
     
     public Synapse() {
+        
         this.uid = UUID.randomUUID().toString();
+        System.out.println("Создан синапс uid == ["+uid+"]");
     }
 
     public String getUid() {

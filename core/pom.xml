@@ -12,8 +12,11 @@
         <module>synapse</module>
         <module>vector</module>
         <module>matrix</module>
+        <module>utils</module>
     </modules>
+    
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
+    
 </project>

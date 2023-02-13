@@ -14,8 +14,14 @@ import java.util.UUID;
  */
 public class Vector {
     
+    /**
+     * Уникальный идентификатор вектора
+     */
     private String uid;
     
+    /**
+     * Карта чисел двойной точности, 
+     */
     private Map <String, Double> data = new HashMap<>();
     private int size = 0; 
     
