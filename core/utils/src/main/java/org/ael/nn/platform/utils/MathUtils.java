@@ -23,4 +23,20 @@ public class MathUtils {
         return x*2;
     }
     
+    public static Double [][] matrixMultiply(Double [][] a, Double [][] b) {
+        int rows = a.length;
+        int columns = b[0].length;
+        Double [][]result = new Double[rows][columns];
+
+        for (int row = 0; row < rows; row++) {
+            for (int col = 0; col < columns; col++) {
+                for (int inner = 0; inner < 2; inner++) {
+                    result[row][col] += a[row][inner] * b[inner][col];
+                }
+            }
+        }
+
+        return result;
+    }
+    
 }

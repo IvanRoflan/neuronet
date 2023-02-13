@@ -33,6 +33,17 @@ public class MathUtilsTest {
         Assert.assertEquals(4.0, y);
         
     }
+    
+    @Test(priority = 1, groups = {"platform-core"})
+    public void matrixMultiplyTest() {
+       System.out.println("Начало теста");
+       Double [][] b = {{1.0, 2.0, 3.1}, {3.4, 2.0, 1.7}};
+       Double [][] a = {{1.1, 2.0}, {3.6, 4.7}, {5.1, 6.2}};
+       
+       Double [][] result = MathUtils.matrixMultiply(a, b);
+       
+       System.out.println("Тест успешно завершен");
+    }
 
     
 }
