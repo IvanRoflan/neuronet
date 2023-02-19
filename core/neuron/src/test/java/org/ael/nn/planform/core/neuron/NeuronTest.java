@@ -17,8 +17,47 @@ public class NeuronTest {
      */
     @Test(priority = 1, groups = {"platform-core"})
     public void createSingleNeuron() {
-        List<Neuron> neuronList = new ArrayList<>();
-        Neuron neuron1 = new Neuron();
+        // Создаем нейрон
+        long synapseCount = 3;
+        Neuron neuron = new Neuron(synapseCount);
+
+        System.out.println(neuron.toString());
+
+        //Выводим список нейронов
+        List<Synapse> synapseList = neuron.getSynapses();
+        for (int i = 0; i < synapseList.size(); i++) {
+            System.out.println("№" + (i+1) + " " + synapseList.get(i).toString());
+        }
+    }
+
+    @Test(priority = 1, groups = {"platform-core"})
+    public void createNetwork() {
+        // Создаем единичный нейрон
+        long count = 3;
+        Neuron singleN = new Neuron(count);
+
+        // Получаем список синапсов
+        List<Synapse> synapseList = singleN.getSynapses();
+
+        // Создаем нейроны входа и настраиваем синапсы
+        List<Neuron> neuronList = new ArrayList();
+        for (int i = 0; i < synapseList.size(); i++) {
+            Neuron n = new Neuron();
+            synapseList.get(i).setOutputUid(singleN.getUid());
+            synapseList.get(i).setInputUid(n.getUid());
+            n.addSynapse(synapseList.get(i));
+            neuronList.add(n);
+        }
+
+        // Выводим информацию о сети
+        System.out.println("Выходной нейрон: " + singleN.getUid() + " с " + count + " выходными синапсами:");
+        for (int i = 0; i < synapseList.size(); i++) {
+            System.out.println("№" + (i+1) + " " + synapseList.get(i).toString());
+        }
+        System.out.println("Нейроны в которые эти синапсы входят:");
+        for (int i = 0; i < neuronList.size(); i++) {
+            System.out.println("№" + (i+1) + " - " + "Нейрон " + neuronList.get(i).getUid());
+        }
     }
 
     /**
@@ -72,6 +111,7 @@ public class NeuronTest {
         for (int i = 0; i < synapseList.size(); i++) {
             System.out.println("№" + (i+1) + " " + synapseList.get(i).toString());
         }
+        
     }
 
 }

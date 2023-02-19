@@ -38,8 +38,12 @@ public class Neuron {
      */
     public void addSynapse(Synapse synapse) {
         if (synapse != null) {
-
+            synapses.add(synapse);
         }
+    }
+
+    public List<Synapse> getSynapses() {
+        return synapses;
     }
     
     
@@ -48,6 +52,7 @@ public class Neuron {
      * @param synapseCount 
      */
     public Neuron(Long synapseCount) {
+        this.uid = UUID.randomUUID().toString();
         if (synapseCount != null && synapseCount > 0) {
             for (int i = 0; i < synapseCount; i++) {
                 synapses.add(new Synapse());
