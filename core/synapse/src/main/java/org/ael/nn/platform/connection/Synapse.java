@@ -76,7 +76,7 @@ public class Synapse {
 
     @Override
     public String toString() {
-        return "синаптическая связь ==> " + "uid входного нейрона = " + inputUid + ", uid выходного нейрона =" + outputUid + '}';
+        return "синаптическая связь №" + uid + " с весом " + w + " ==> " + "uid входного нейрона = " + inputUid + ", uid выходного нейрона =" + outputUid + '}';
     }
      
      
