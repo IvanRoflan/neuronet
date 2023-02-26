@@ -49,7 +49,7 @@ public class SynapseTest {
         Neuron outputN = new Neuron();
 
         // Создадим список нейронов входа
-        List<Neuron> inputNList = new ArrayList();
+        List<Neuron> inputNList = new ArrayList<>();
 
         // Заполняем список
         for (int i = 0; i < 5; i++) {
@@ -57,7 +57,7 @@ public class SynapseTest {
         }
 
         // Создадим и заполним список синапсов
-        List<Synapse> synapseList = new ArrayList();
+        List<Synapse> synapseList = new ArrayList<>();
         for (int i = 0; i < inputNList.size(); i++) {
             Synapse s = new Synapse();
             s.setOutputUid(outputN.getUid());

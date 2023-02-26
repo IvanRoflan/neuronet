@@ -23,7 +23,7 @@ public class NeuronTest {
 
         System.out.println(neuron.toString());
 
-        //Выводим список нейронов
+        //Выводим список синапсов
         List<Synapse> synapseList = neuron.getSynapses();
         for (int i = 0; i < synapseList.size(); i++) {
             System.out.println("№" + (i+1) + " " + synapseList.get(i).toString());
@@ -40,7 +40,7 @@ public class NeuronTest {
         List<Synapse> synapseList = singleN.getSynapses();
 
         // Создаем нейроны входа и настраиваем синапсы
-        List<Neuron> neuronList = new ArrayList();
+        List<Neuron> neuronList = new ArrayList<>();
         for (int i = 0; i < synapseList.size(); i++) {
             Neuron n = new Neuron();
             synapseList.get(i).setOutputUid(singleN.getUid());
