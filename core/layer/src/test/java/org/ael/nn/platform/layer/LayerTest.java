@@ -35,6 +35,25 @@ public class LayerTest {
 
     }
 
-    
+    @Test(priority = 1, groups = {"platform-core"})
+    public void createMiniNetwork() {
+        // Создается входной слой нейронов
+        // с номером 0, содержащий 3 нейрона       
+        Layer inputLayer = new Layer(0, 3);
+
+        // Создается промежуточный слой нейронов
+        // с номером 1, содержащий 1 нейрон       
+        Layer innerLayer = new Layer(1, 1);
+
+        //Соединяем два слоя синапсами
+        List<Synapse> synapseList = inputLayer.connectToLayer(innerLayer);
+
+        //Выводим информацию
+        System.out.println(inputLayer.toString() + "\n" + "соединен с " + innerLayer.toString() + "\n" + "с помощью синапсов:");
+        for (int i = 0; i < synapseList.size(); i++) {
+            System.out.println("№" + (i+1) + " " + synapseList.get(i).toString());
+        }
+    }
+        
     
 }

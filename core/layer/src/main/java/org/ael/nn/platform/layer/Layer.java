@@ -131,9 +131,42 @@ public class Layer {
         }
         return synapsList;
     }
+    
+    /**
+     * Соединение с другим слоем нейронной сети
+     * 
+     * @param layer подключаемый слой
+     */
+    public List<Synapse> connectToLayer(Layer layer) {
+        List<Synapse> synapsList = new ArrayList<>();
+        if (layer != null && layer.getNeuronList().size() != 0) {
+            int connectionCount = neuronCount * layer.neuronCount;
 
-    
-    
+            System.out.println("Формирование [" + connectionCount + "] синапсов от слоя = [" + layaerNumber + "] к слою [" + this.uid + "] номер слоя: " + layer.layaerNumber);
+            
+            StringBuilder sb = new StringBuilder();
+            sb.append("\n");
+
+            int synapseCount = 0;
+            for (int i = 0; i < neuronCount; i++) {
+                System.out.println("Номер входного нейрона: " + neuronList.get(i));
+                for (int j = 0; j < layer.getNeuronCount(); j++) {
+                    System.out.println("Номер выходного нейрона: " + layer.getNeuronList().get(j).getUid());
+                    Synapse synapse = new Synapse();                    
+                    synapse.setInputUid(layer.getNeuronList().get(j).getUid());
+                    synapse.setOutputUid(neuronList.get(i).getUid());
+                    neuronList.get(i).addSynapse(synapse);  
+                    layer.getNeuronList().get(j).addSynapse(synapse);                  
+                    synapsList.add(synapse);  
+                    synapseCount++;
+                    sb.append(String.format("%-35s %-7s %s","["+synapseCount+"]-ая синаптическая связь:", "["+i+" "+j+"]", "uid = "+synapse.getUid()));
+                    sb.append("\n");
+                }
+            }
+            System.out.println(sb.toString());
+        }
+        return synapsList;
+    }
     
     
     public Integer getLayaerNumber() {

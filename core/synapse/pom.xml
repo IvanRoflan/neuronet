@@ -27,7 +27,12 @@
             <artifactId>testng</artifactId>
             <version>${testng.version}</version>
             <type>jar</type>
-        </dependency>        
+        </dependency> 
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>neuron</artifactId>
+            <version>${project.version}</version>
+        </dependency>       
     </dependencies> 
        
     <build>
