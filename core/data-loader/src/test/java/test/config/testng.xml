@@ -10,7 +10,7 @@
             </run>     
         </groups>     
         <classes>       
-           
+            <class name="org.ael.nn.platform.data.loader.DataLoaderTest" />                    
         </classes>   
     </test> 
 </suite> 

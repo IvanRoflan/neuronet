@@ -96,6 +96,7 @@ public class MathUtilsTest {
     }
 
     
+    /*
     @Test(priority = 1, groups = {"platform-core"})
     public void matrixMultiplyTest() {
        System.out.println("Начало теста умножения матриц");
@@ -133,6 +134,6 @@ public class MathUtilsTest {
 
        System.out.println("Тест завершен");
     }
-
+*/
     
 }

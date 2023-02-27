@@ -13,6 +13,7 @@
         <module>vector</module>
         <module>matrix</module>
         <module>utils</module>
+        <module>data-loader</module>
     </modules>
     
     <properties>

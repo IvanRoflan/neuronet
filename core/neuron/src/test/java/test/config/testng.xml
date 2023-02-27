@@ -10,7 +10,8 @@
             </run>     
         </groups>     
         <classes>       
-            <class name="org.ael.nn.planform.core.neuron.NeuronTest" />                    
+            <class name="org.ael.nn.planform.core.neuron.NeuronTest" />   
+             <class name="org.ael.nn.planform.core.neuron.SynapseTest" />                                
         </classes>   
     </test> 
 </suite> 
