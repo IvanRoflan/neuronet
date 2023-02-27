@@ -1,6 +1,8 @@
 
 package org.ael.nn.planform.core.neuron;
 
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -16,6 +18,48 @@ public class Neuron {
      */
     private String uid;
 
+    private Double output;
+
+    /**
+     * Get the value of output
+     *
+     * @return the value of output
+     */
+    public Double getOutput() {
+        return output;
+    }
+
+    /**
+     * Set the value of output
+     *
+     * @param output new value of output
+     */
+    public void setOutput(Double output) {
+        this.output = output;
+    }
+
+    private transient final PropertyChangeSupport propertyChangeSupport = new PropertyChangeSupport(this);
+
+    /**
+     * Add PropertyChangeListener.
+     *
+     * @param listener
+     */
+    public void addPropertyChangeListener(PropertyChangeListener listener) {
+        propertyChangeSupport.addPropertyChangeListener(listener);
+    }
+
+    /**
+     * Remove PropertyChangeListener.
+     *
+     * @param listener
+     */
+    public void removePropertyChangeListener(PropertyChangeListener listener) {
+        propertyChangeSupport.removePropertyChangeListener(listener);
+    }
+
+    
+    
     /**
      * Список входных связей
      *
@@ -48,6 +92,7 @@ public class Neuron {
     
     
     /**
+     * Конструктор класса 
      * 
      * @param synapseCount 
      */
