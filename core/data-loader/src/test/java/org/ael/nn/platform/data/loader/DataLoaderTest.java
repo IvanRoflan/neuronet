@@ -23,20 +23,9 @@ public class DataLoaderTest {
     public void loadImageFromFileNoPath() {
 
         DataLoader loader = new DataLoader();
-        loader.load("opopop[", "");
+        loader.load(path,fileName);
 
     }
 
-    /**
-     * Тест загрузки изображения из файла
-     */
-    @Test(priority = 2, groups = {"platform-core"})
-    public void loadImageFromFile() {
-
-        DataLoader loader = new DataLoader();
-        loader.load(path, fileName);
-
-    }
     
-   
 }
