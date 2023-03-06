@@ -52,10 +52,10 @@ public class MathUtils {
         return result;
     }
     
-    public static Double [][] matrixMultiply(Double [][] a, Double [][] b) {
+    public static Double[][] matrixMultiply(Double[][] a, Double[][] b) {
         int rows = a.length;
         int columns = b[0].length;
-        Double [][]result = new Double[rows][columns];
+        Double[][] result = new Double[rows][columns];
         if (rows == columns) {
 
             for (int row = 0; row < rows; row++) {
@@ -65,13 +65,12 @@ public class MathUtils {
                     }
                 }
             }
-    
-            
+
         } else {
-            System.out.println("Кол-во строк первой матрицы должно равняться кол-ву столбцов второй");
+            System.out.println("Кол-во строк первой матрицы должно равняться кол-ву столбцов второй матрицы");
         }
         return result;
-        
+
     }
     
 }
