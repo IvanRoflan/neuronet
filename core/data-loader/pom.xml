@@ -35,7 +35,12 @@
             <artifactId>matrix</artifactId>
             <version>${project.version}</version>
         </dependency>
-    </dependencies> 
+          <dependency>
+               <groupId>${project.groupId}</groupId>
+               <artifactId>vector</artifactId>
+               <version>${project.version}</version>
+          </dependency>
+     </dependencies> 
        
     <build>
         <plugins>

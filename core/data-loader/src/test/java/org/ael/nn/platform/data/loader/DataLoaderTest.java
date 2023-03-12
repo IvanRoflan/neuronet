@@ -4,6 +4,8 @@
  */
 package org.ael.nn.platform.data.loader;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import org.testng.annotations.Test;
 
 /**
@@ -12,8 +14,10 @@ import org.testng.annotations.Test;
  */
 public class DataLoaderTest {
     
+    // Каталог для разамещения входных образов
+    Path path = Paths.get("src", "main", "resources", "input", "images");
     
-    String path = "/home/developer/git/gitlab/ael/neuronet-framework/neuronet-core/core/data-loader/src/test/java/test/data";
+    // Файлы с входными образами       
     String fileName = "digits.dat";
     
     /**
@@ -23,7 +27,7 @@ public class DataLoaderTest {
     public void loadImageFromFileNoPath() {
 
         DataLoader loader = new DataLoader();
-        loader.load(path,fileName);
+        loader.loadVectorList(path.toString(),fileName, 7);
 
     }
 
