@@ -4,7 +4,6 @@
 
 package org.ael.nn.platform.vector;
 
-import java.util.Locale;
 import java.util.UUID;
 
 /**
@@ -27,6 +26,19 @@ public class Vector {
      * Объявление одномерного массива 
      */
     private double [] data;
+
+    public Vector(double[] data) {
+        this.uid = UUID.randomUUID().toString();
+        int len = data.length;
+        if (data != null && len != 0)
+        {
+            this.data = data;
+            System.out.println("Создан вектор рамером ["+this.data.length+"] элементов");
+            System.out.println(this.toString());
+        }        
+    }
+    
+    
     
 
     public Vector(Integer size) {
