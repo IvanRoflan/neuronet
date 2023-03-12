@@ -4,6 +4,8 @@
 
 package org.ael.nn.platform.vector;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 /**
@@ -26,6 +28,9 @@ public class Vector {
      * Объявление одномерного массива 
      */
     private double [] data;
+    
+    private final Map<Integer, String> dataIndexUidMap = new HashMap<>();
+    
 
     public Vector(double[] data) {
         this.uid = UUID.randomUUID().toString();
@@ -33,10 +38,20 @@ public class Vector {
         if (data != null && len != 0)
         {
             this.data = data;
-            System.out.println("Создан вектор рамером ["+this.data.length+"] элементов");
+            for (int i = 0; i < 10; i++) {
+                dataIndexUidMap.put(i,UUID.randomUUID().toString());
+            }            
+            System.out.println("Создан вектор размером ["+this.data.length+"] элементов");
+            
             System.out.println(this.toString());
         }        
     }
+
+    public Map<Integer, String> getDataIndexUidMap() {
+        return dataIndexUidMap;
+    }
+    
+    
     
     
     
