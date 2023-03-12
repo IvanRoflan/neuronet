@@ -12,25 +12,8 @@ import org.testng.annotations.Test;
  */
 public class NeuronTest {
 
-    /**
-     * Тест создания нейцрона и соединения между нейронами
-     */
-    @Test(priority = 1, groups = {"platform-core"})
-    public void createSingleNeuron() {
-        // Создаем нейрон
-        long synapseCount = 3;
-        Neuron neuron = new Neuron(synapseCount);
-
-        System.out.println(neuron.toString());
-
-        //Выводим список синапсов
-        List<Synapse> synapseList = neuron.getSynapses();
-        for (int i = 0; i < synapseList.size(); i++) {
-            System.out.println("№" + (i+1) + " " + synapseList.get(i).toString());
-        }
-    }
-
-    @Test(priority = 1, groups = {"platform-core"})
+   
+    @Test(priority = 2, groups = {"platform-core"})
     public void createNetwork() {
         // Создаем единичный нейрон
         long count = 3;
@@ -59,5 +42,29 @@ public class NeuronTest {
             System.out.println("№" + (i+1) + " - " + "Нейрон " + neuronList.get(i).getUid());
         }
     }
+    
+   
+    /**
+     * Тест создания нейцрона и соединения между нейронами
+     */
+    @Test(priority = 1, groups = {"platform-core"})
+    public void createSingleNeuron() {
+        
+        // Создаем нейрон
+        
+        System.out.println("Тест создания нейрона и вычисления выходного сигнала");
+        long synapseCount = 3;
+        Neuron neuron = new Neuron(synapseCount);
+        neuron.setSynapseWeights( new double [] { -0.3, 3.1 , 0.5});
+        
+        
+        
+        
+        System.out.println(neuron.toString());
+
+      
+    }
+
+    
 
 }

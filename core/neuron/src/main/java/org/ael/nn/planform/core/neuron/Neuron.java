@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import org.ael.nn.platform.connection.Synapse;
+import org.ael.nn.platform.vector.Vector;
 
 
 
@@ -18,6 +19,10 @@ public class Neuron {
      */
     private String uid;
 
+    
+    /**
+     * Значение выхода нейронной сети 
+     */
     private Double output;
 
     /**
@@ -58,6 +63,56 @@ public class Neuron {
         propertyChangeSupport.removePropertyChangeListener(listener);
     }
 
+    
+    /**
+     * 
+     * @param weights 
+     */
+    public void  setSynapseWeights (double [] weights)
+    {
+ 
+        System.out.println("Установка весов синапсов для нейрона   uid = ["+this.uid+"]... ");
+        if (weights != null && weights.length != 0)
+        {
+            
+            if (!this.synapses.isEmpty())
+            {
+                if (this.synapses.size() == weights.length)                
+                for (int i = 0; i < synapses.size(); i++) {
+                    synapses.get(i).setW(weights[i]);
+                }
+                
+                Vector v = new Vector(weights);
+                System.out.println("Установка весов синапсов для нейрона   uid = ["+this.uid+"] ЗАВЕРШЕНА");
+                System.out.println("Установлены веса: "+v.toString());
+                
+            }
+        
+        }
+   
+    }
+    
+    
+    /**
+     * 
+     * @param v 
+     */
+    public void connectVector(Vector v)
+    {
+        
+        if (v != null)
+        {
+            System.out.println("Подключение входного вектора uid = "+v.getUid());
+            if (v.getData().length == synapses.size())
+            {
+                for (int i = 0; i < v.getData().length; i++) {
+                    
+                }
+            }
+            
+        }
+        
+    }
     
     
     /**
@@ -106,10 +161,10 @@ public class Neuron {
     }
 
     /**
-     * Вычисление выхода
+     * Вычисление выхода нейрона
      */
     public void calculate() {
-
+        
     }
 
     /**
