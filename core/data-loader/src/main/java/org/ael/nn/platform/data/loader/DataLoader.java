@@ -1,7 +1,6 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  */
-
 package org.ael.nn.platform.data.loader;
 
 import java.io.File;
@@ -10,12 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import java.util.StringTokenizer;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import org.ael.nn.platform.matrix.Matrix;
 import org.ael.nn.platform.vector.Vector;
-
-
 
 /**
  *
@@ -25,11 +19,11 @@ public class DataLoader {
 
     // модификатор доступа      название класса      название экземпляра
     //  |                        /                    /
-    private                    File                 file; 
-    
+    private File file;
+
     // Класс сканирования строк из файла
     private Scanner scanner;
-   
+
     /**
      * Загрузка списка векторов из файла
      *
@@ -46,7 +40,7 @@ public class DataLoader {
 
         List<Vector> vectorList = new ArrayList<>();
 
-        System.out.println("Загрузка списка векторов длиной ["+len+"] ...");
+        System.out.println("Загрузка списка векторов длиной [" + len + "] ...");
 
         if (checkIfFileExist(path, fileName)) {
             try {
@@ -61,20 +55,29 @@ public class DataLoader {
                     if (!s.isEmpty()) {
                         filled++;
                         System.out.println(String.format("%-7s ==> %s", "[" + index + "]", s));
-                        readVectorFromString(s, len);
+                        Vector vectorFromString = readVectorFromString(s, len, index);
+                        if (vectorFromString != null) {
+                            vectorList.add(vectorFromString);
+                            System.out.println("Добавлен вектор :" + vectorFromString.getUid());
+                        }
                     } else {
                         empty++;
                     }
                 }
             } catch (FileNotFoundException ex) {
-                System.out.println("Ошибка чтения из файла: ");
+                System.out.println("Ошибка чтения из файла:  " + fileName + " описание ошибки: " + ex.toString());
             }
+
+            if (!vectorList.isEmpty()) {
+                System.out.println("Успешно прочитан из файла [" + fileName + "] список векторов [" + vectorList.size() + "] элементов");
+            } else {
+                System.out.println("Ошибка чтения списка векторов из файла [" + fileName + "] СПИСОК ВЕКТОРОВ НЕ ПРОЧИТАН");
+            }
+
         }
         return vectorList;
-
     }
 
-    
     /**
      * Формирование вектора путем разбора строки
      *
@@ -82,12 +85,12 @@ public class DataLoader {
      * @param len ожидаемое количество строк вектора
      * @return
      */
-    private Vector readVectorFromString(String s, int len) {
+    private Vector readVectorFromString(String s, int len, int strIndex) {
         Vector vector = null;
 
         StringTokenizer st = new StringTokenizer(s, ",");
 
-        System.out.println("Строка имеет [" + st.countTokens() + "]  токенов");
+        System.out.println("Строка [" + strIndex + "] имеет [" + st.countTokens() + "]  токенов");
         if (st.countTokens() == len) {
             double[] v = new double[len];
 
@@ -101,18 +104,16 @@ public class DataLoader {
                     v[index] = d;
                 } catch (NumberFormatException ex) {
                     System.out.println("Не удалось преобразовать токен: [" + str + "] в число формата " + Double.class.getSimpleName());
-                }                              
+                }
             }
-            
+
             vector = new Vector(v);
-            
+
         } else {
-            System.out.println("Ошибка разбора строки: ожидаемая длина вектора [" +len+  "] не соответствует количеству токенов [" +st.countTokens()+ "]");
+            System.out.println("Ошибка разбора строки [" + strIndex + "]: ожидаемая длина вектора [" + len + "] не соответствует количеству токенов [" + st.countTokens() + "]");
         }
         return vector;
     }
-    
-    
 
     /**
      * Проверка существования файла
@@ -145,6 +146,5 @@ public class DataLoader {
         }
         return result;
     }
-  
-    
+
 }
