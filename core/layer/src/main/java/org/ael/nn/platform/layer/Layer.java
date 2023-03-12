@@ -99,8 +99,8 @@ public class Layer {
     public List<Synapse> addInputVector(Vector vector) {
         List<Synapse> synapsList = new ArrayList<>();
 
-        if (vector != null && vector.getData().size() > 0) {
-            int connectionCount = vector.getData().size() * neuronList.size();
+        if (vector != null && vector.getData().length > 0) {
+            int connectionCount = vector.getData().length * neuronList.size();
 
             System.out.println("Формирование [" + connectionCount + "] синапсов от вектора uid = [" + vector.getUid() + "] к слою [" + this.uid + "] номер слоя: " + layaerNumber);
 
@@ -108,7 +108,7 @@ public class Layer {
             sb.append("\n");            
             
             int synapseCount = 0;
-            List<Double> v = new ArrayList<>(vector.getData().values());
+            List<Double> v = new ArrayList<>(vector.getData().length);
             
             for (int i = 0; i < v.size(); i++) {              
                 
