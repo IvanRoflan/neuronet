@@ -4,8 +4,7 @@
 
 package org.ael.nn.platform.vector;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Locale;
 import java.util.UUID;
 
 /**
@@ -20,22 +19,25 @@ public class Vector {
     private String uid;
     
     /**
-     * Карта чисел двойной точности, 
-     */
-    private Map <String, Double> data = new HashMap<>();
+     * Размер массива
+     */   
     private int size = 0; 
     
+    /**
+     * Объявление одномерного массива 
+     */
+    private double [] data;
     
-    public Vector() {
-        this.uid = UUID.randomUUID().toString();
-    }
 
     public Vector(Integer size) {
+        this.uid = UUID.randomUUID().toString();
         if (size != null && size > 0)
         {
             this.size = size;
+            data = new double [size];
+            
             for (int i = 0; i < size; i++) {
-                data.put(UUID.randomUUID().toString(), (Double) Math.random() * 2 - 1 );                
+                data[i] = (Double) Math.random() * 2 - 1 ;                
             }            
         }
     }
@@ -48,14 +50,13 @@ public class Vector {
         this.uid = uid;
     }
 
-    public Map<String, Double> getData() {
+    public double[] getData() {
         return data;
     }
 
-    public void setData(Map<String, Double> data) {
+    public void setData(double[] data) {
         this.data = data;
     }
-
    
     public int getSize() {
         return size;
@@ -70,12 +71,12 @@ public class Vector {
         StringBuilder sb = new StringBuilder();
         sb.append("Vector: ");
         sb.append("[ ");
-        if (data.size()>0)
+        if (data.length > 0)
         {
-             data.forEach( (key,value) -> {
-                sb.append(String.format("%7.4f", value ));
-                sb.append(" ");             
-             });            
+            for (int i = 0; i < data.length; i++) {
+                sb.append(String.format("%7.4f", data[i]));
+                sb.append(String.format("%-3s", ""));             
+            }            
         }    
         sb.append("]");
         return sb.toString();
