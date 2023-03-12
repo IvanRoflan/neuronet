@@ -1,6 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- */
 
 package org.ael.nn.platform.utils;
 
@@ -23,18 +20,33 @@ public class MathUtils {
         return x*2;
     }
 
+    
+    /**
+     * Умножение матрицы на константу
+     * 
+     * @param matrix
+     * @param a
+     * @return 
+     */
     public static Double [][] matrixMultiplicationByConstant(Double [][] matrix, Double a) {
         Double [][] result = new Double[matrix.length][matrix[0].length];
-
+        
         for (int i = 0; i < matrix.length; i++) {
             for (int j = 0; j < matrix[i].length; j++) {
                 result[i][j] = a * matrix[i][j];
             }
         }
-
         return result;
     }
 
+    
+    /**
+     * Умножение матрицы на вектор
+     * 
+     * @param matrix
+     * @param vector
+     * @return 
+     */
     public static Double [] matrixMultiplicationByVector(Double[][] matrix, Double[] vector) {
         Double [] result = new Double[matrix.length];
         if (matrix[0].length == vector.length) {
@@ -52,6 +64,14 @@ public class MathUtils {
         return result;
     }
     
+    
+    /**
+     * Умножение матриц
+     *
+     * @param a
+     * @param b
+     * @return
+     */
     public static Double[][] matrixMultiply(Double[][] a, Double[][] b) {
         int rows = a.length;
         int columns = b[0].length;
@@ -70,7 +90,6 @@ public class MathUtils {
             System.out.println("Кол-во строк первой матрицы должно равняться кол-ву столбцов второй матрицы");
         }
         return result;
-
     }
-    
+
 }

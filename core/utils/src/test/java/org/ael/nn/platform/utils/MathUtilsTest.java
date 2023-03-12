@@ -8,94 +8,94 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 /**
- * Тесты математических утилит 
- * 
- * 
+ * Тесты математических утилит
+ *
+ *
  * @author vaganovdv
  */
 public class MathUtilsTest {
-    
-     /**
-     * Тест статических методов класса  MathUtils
-     *  (пример оформления утилит)
+
+    /**
+     * Тест статических методов класса MathUtils (пример оформления утилит)
      */
     @Test(priority = 1, groups = {"platform-core"})
     public void multiplicationBy2Test() {
 
         // Умножение 2 * 2.0
         Double y = MathUtils.multiplicationBy2(2.0);
-        
+
         // Проверка результата теста 
-        
         // проверить что равно 4.0 = y
         //              |
         //              |
         Assert.assertEquals(4.0, y);
-        
+
     }
 
     @Test(priority = 1, groups = {"platform-core"})
     public void matrixMultiplyByConstant() {
         System.out.println("Начало теста умножения матрицы на константу");
 
-        Double [][] matrix = {
+        Double[][] A = {
             {1.0, 2.0, 3.1},
             {3.4, 2.0, 1.7}
-            };
-        Double a = 5.0;
-        Double [][] shouldBe = {
+        };
+        Double B = 5.0;
+        
+        // Ожидаемая матрица
+        Double[][] shouldBe = {
             {5.0, 10.0, 15.5},
             {17.0, 10.0, 8.5}
         };
 
-        Double [][] result = MathUtils.matrixMultiplicationByConstant(matrix, a);
+        Double[][] result = MathUtils.matrixMultiplicationByConstant(A, B);
 
         System.out.println("Вывод ожидаемой матрицы: \n");
-       for (int i = 0; i < shouldBe.length; i++) {
-        for (int j = 0; j < shouldBe[i].length; j++) {
-            System.out.print(shouldBe[i][j] + "\t");
+        for (int i = 0; i < shouldBe.length; i++) {
+            for (int j = 0; j < shouldBe[i].length; j++) {
+                System.out.print(shouldBe[i][j] + "\t");
+            }
+            System.out.println();
         }
-        System.out.println();
-       }
 
-       System.out.println("Вывод полученной матрицы: \n");
-       for (int i = 0; i < result.length; i++) {
-        for (int j = 0; j < result[i].length; j++) {
-            System.out.print(result[i][j] + "\t");
+        System.out.println("Вывод полученной матрицы: \n");
+        for (int i = 0; i < result.length; i++) {
+            for (int j = 0; j < result[i].length; j++) {
+                System.out.print(result[i][j] + "\t");
+            }
+            System.out.println();
         }
-        System.out.println();
-       }
-
-       System.out.println("Тест завершен");
+       
+        Assert.assertEquals(result, shouldBe);
+        System.out.println("Тест завершен");
     }
 
     @Test(priority = 1, groups = {"platform-core"})
     public void matrixMultiplyByVector() {
         System.out.println("Начало теста умножения матрицы на вектор");
 
-        Double [][] a = {
+        Double[][] a = {
             {1.0, 2.0, 3.1},
             {3.4, 2.0, 1.7}
         };
-        Double [] vector = { 3.0, 4.0, 2.0 };
+        Double[] vector = {3.0, 4.0, 2.0};
 
-        Double [] shouldBe = { 17.2, 21.6 };
+        Double[] shouldBe = {17.2, 21.6};
 
-        Double [] result = MathUtils.matrixMultiplicationByVector(a, vector);
+        Double[] result = MathUtils.matrixMultiplicationByVector(a, vector);
 
         System.out.println("Вывод ожидаемого вектора: \n");
-       for (int i = 0; i < shouldBe.length; i++) {    
+        for (int i = 0; i < shouldBe.length; i++) {
             System.out.print(shouldBe[i] + " ");
-       }
+        }
 
-       System.out.println("Вывод полученного вектора: \n");
-       for (int i = 0; i < result.length; i++) {    
+        System.out.println("Вывод полученного вектора: \n");
+        for (int i = 0; i < result.length; i++) {
             System.out.print(result[i] + " ");
-       }
-       System.out.println("Тест завершен");
+        }
+        System.out.println("Тест завершен");
     }
 
-    
     /*
     @Test(priority = 1, groups = {"platform-core"})
     public void matrixMultiplyTest() {
@@ -134,6 +134,5 @@ public class MathUtilsTest {
 
        System.out.println("Тест завершен");
     }
-*/
-    
+     */
 }
