@@ -92,27 +92,8 @@ public class Neuron {
    
     }
     
+  
     
-    /**
-     * 
-     * @param v 
-     */
-    public void connectVector(Vector v)
-    {
-        
-        if (v != null)
-        {
-            System.out.println("Подключение входного вектора uid = "+v.getUid());
-            if (v.getData().length == synapses.size())
-            {
-                for (int i = 0; i < v.getData().length; i++) {
-                    
-                }
-            }
-            
-        }
-        
-    }
     
     
     /**
