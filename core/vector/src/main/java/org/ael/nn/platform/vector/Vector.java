@@ -9,7 +9,8 @@ import java.util.Map;
 import java.util.UUID;
 
 /**
- *
+ * Класс для предствления вектора
+ * 
  * @author vaganovdv
  */
 public class Vector {
@@ -31,41 +32,37 @@ public class Vector {
     
     private final Map<Integer, String> dataIndexUidMap = new HashMap<>();
     
-
     public Vector(double[] data) {
         this.uid = UUID.randomUUID().toString();
         int len = data.length;
-        if (data != null && len != 0)
-        {
+        
+        if (data != null && len != 0) {
             this.data = data;
-            for (int i = 0; i < 10; i++) {
-                dataIndexUidMap.put(i,UUID.randomUUID().toString());
-            }            
-            System.out.println("Создан вектор размером ["+this.data.length+"] элементов");
-            
-            System.out.println(this.toString());
+            // Формирование уникального идентифкатора для каждой компоненты вектора
+            for (int i = 0; i < data.length; i++) {                
+                dataIndexUidMap.put(i, UUID.randomUUID().toString());
+            }                        
         }        
     }
 
     public Map<Integer, String> getDataIndexUidMap() {
         return dataIndexUidMap;
     }
-    
-    
-    
-    
+   
     
 
     public Vector(Integer size) {
         this.uid = UUID.randomUUID().toString();
-        if (size != null && size > 0)
-        {
+        if (size != null && size > 0) {
             this.size = size;
-            data = new double [size];
             
+            data = new double[size];
             for (int i = 0; i < size; i++) {
-                data[i] = (Double) Math.random() * 2 - 1 ;                
-            }            
+                data[i] = (Double) Math.random() * 2 - 1;
+            }
+            for (int i = 0; i < data.length; i++) {
+                dataIndexUidMap.put(i, UUID.randomUUID().toString());
+            }
         }
     }
 
@@ -97,18 +94,27 @@ public class Vector {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("Vector: ");
-        sb.append("[ ");
-        if (data.length > 0)
-        {
+
+        sb.append(" [" + data.length + "] элементов ");
+
+        if (this.uid != null && !uid.isEmpty()) {
+            sb.append(" uid = " + this.uid);
+        }
+        sb.append("\n{ \n");
+        if (data.length > 0) {
             for (int i = 0; i < data.length; i++) {
-                sb.append(String.format("%7.4f", data[i]));
-                sb.append(String.format("%-3s", ""));             
-            }            
-        }    
-        sb.append("]");
+                sb.append(String.format("%7s", "[" + i + "]"));
+                sb.append(String.format("%7s", ""));
+                sb.append(String.format("%12.4f", data[i]));
+                sb.append(String.format("%7s", ""));
+                sb.append(String.format("%-70s", " uid = " + this.dataIndexUidMap.get(i)));
+                sb.append("\n");
+            }
+        }
+        sb.append("}");
         return sb.toString();
     }
-    
+
     
     
     
