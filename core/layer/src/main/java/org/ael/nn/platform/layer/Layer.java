@@ -169,6 +169,54 @@ public class Layer {
     }
     
     
+      
+    /**
+     * Подключение входного вектора 
+     *
+     * @param v
+     */
+    public void connectInputVector(Vector v) {
+
+        if (v != null) {
+            System.out.println("Подключение входного вектора uid = " + v.getUid() + " размерность вектора: [" + v.getData().length + "] элементов к слою uid = "+this.uid);
+
+            StringBuilder sb = new StringBuilder();
+            sb.append("\n");
+            
+            // Обход  элементов вектора
+            for (int i = 0; i < v.getData().length; i++) {
+
+                sb.append("Подключение к слою элемента вектора с индексом ["+i+"],  размер вектора ["+v.getData().length+"] элементов\n");
+                // Обход списка нейронов 
+                sb.append("Обход списка ["+neuronList.size()+"] нейронов слоя\n ");
+                for (int j = 0; j < neuronList.size(); j++) {
+                    // Получение нейрона из списка нейронов слоя                    
+                    Neuron neuron = neuronList.get(j);
+                    sb.append("Извлечен из слоя нейрон с индексом ["+j+"]\n");
+                    // Создание и подключение синапса и элемента вектора
+                    Synapse s = new Synapse();    
+                    sb.append("Создан синапс ui = "+uid+"\n");
+                    
+                    // i - номер компоненты вектора
+                    // Поучение идентификатора компоненты в векторе
+                    String vectorComponentUID = v.getDataIndexUidMap().get(i);
+                    s.setInputUid(vectorComponentUID);
+                    s.setOutputUid(neuron.getUid());
+                    sb.append("Компонента вектора ["+i+"] поключена к нейрону ["+j+"] c использованием синапса uid = "+s.getUid()+"\n");                                        
+                    // Добавление синапса в нейрон
+                    neuron.addSynapse(s);
+                   
+                }
+            }
+            
+            System.out.println(sb.toString());
+        } else {
+            System.out.println("Ошибка: невозможно подключить пустой вектор к слою: uid = " + this.uid);
+        }
+
+    }
+
+    
     public Integer getLayaerNumber() {
         return layaerNumber;
     }

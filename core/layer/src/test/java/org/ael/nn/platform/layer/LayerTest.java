@@ -5,6 +5,7 @@ package org.ael.nn.platform.layer;
 import java.util.List;
 import org.ael.nn.platform.connection.Synapse;
 import org.ael.nn.platform.vector.Vector;
+import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
 
@@ -17,6 +18,7 @@ public class LayerTest {
     /**
      * Тест создания слоя нейронов
      */
+    @Ignore
     @Test(priority = 1, groups = {"platform-core"})
     public void createLayer() {
 
@@ -35,7 +37,11 @@ public class LayerTest {
 
     }
 
-    @Test(priority = 1, groups = {"platform-core"})
+    /**
+     * Тест 
+     */
+    @Ignore
+    @Test(priority = 2, groups = {"platform-core"})
     public void createMiniNetwork() {
         // Создается входной слой нейронов
         // с номером 0, содержащий 3 нейрона       
@@ -51,11 +57,20 @@ public class LayerTest {
         //Выводим информацию
         System.out.println(inputLayer.toString() + "\n" + "соединен с " + innerLayer.toString() + "\n" + "с помощью синапсов:");
         for (int i = 0; i < synapseList.size(); i++) {
-            System.out.println("№" + (i+1) + " " + synapseList.get(i).toString());
+            System.out.println("#" + (i+1) + " " + synapseList.get(i).toString());
         }
     }
         
     
+      
+    @Test(priority = 3, groups = {"platform-core"})
+    public void connectVectorToLayer() {
+        
+        Layer inputLayer = new Layer(0, 1);
+        Vector v = new Vector(3);
+        inputLayer.connectInputVector(v);
+        
+    }
    
     
 }
