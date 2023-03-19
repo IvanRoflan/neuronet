@@ -34,8 +34,7 @@ public class Synapse {
     public Synapse() {
         
         // Генерация случайного идентификатора, преобразование идентификатора в строку
-        this.uid = UUID.randomUUID().toString();
-        System.out.println("Создан синапс uid ==> ["+uid+"]");
+        this.uid = UUID.randomUUID().toString();       
     }
 
     public String getUid() {
