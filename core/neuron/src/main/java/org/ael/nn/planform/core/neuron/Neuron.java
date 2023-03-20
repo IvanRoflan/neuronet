@@ -143,8 +143,11 @@ public class Neuron {
 
     /**
      * Вычисление выхода нейрона
+     * печать матрицы (вектора)
+     * 
      */
     public void calculate() {
+        
         
     }
 
