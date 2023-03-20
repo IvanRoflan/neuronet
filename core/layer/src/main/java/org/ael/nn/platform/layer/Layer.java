@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.UUID;
 import org.ael.nn.planform.core.neuron.Neuron;
 import org.ael.nn.platform.connection.Synapse;
+import org.ael.nn.platform.matrix.Matrix;
 import org.ael.nn.platform.vector.Vector;
 
 /**
@@ -101,11 +102,19 @@ public class Layer {
         // Создание списка синпсов
         List<Synapse> synapsList = new ArrayList<>();
 
+       
+        
         if (vector != null && vector.getData().length > 0) {
             // Счетчик  количества синапсов, подключенных к вектору
             //  
             int connectionCount = vector.getData().length * neuronList.size();
 
+            // Создание матрицы синптических связей
+            Matrix W  = new Matrix ();
+            W.setRows(vector.getSize());
+            W.setColumns(neuronList.size());
+            
+            
             System.out.println("Формирование [" + connectionCount + "] синапсов от вектора uid = [" + vector.getUid() + "] к слою [" + this.uid + "] номер слоя: " + layaerNumber);
 
             StringBuilder sb = new StringBuilder();
@@ -120,12 +129,18 @@ public class Layer {
                 sb.append(String.format("%-25s %-5s","Номер строки вектора ==> ", "["+i+"], "));                
                 sb.append("\n");
                 
-                // Цикл обхода 
+                // Цикл обхода нейронов, входящих в слой
                 for (int j = 0; j < neuronList.size(); j++) {
                     sb.append(String.format("  %-15s %-7s","номер нейрона:", "["+j+"]")); 
                     
+                    // Заполнение элементов матрицы синаптических связей
+                    
                     // Cоздание связи (синапс) между 
                     Synapse synapse = new Synapse();                    
+                    // Чтение веса (коэффциента в синапсе)
+                    Double w = synapse.getW();
+                    // Заполнение матрицы синаптических связей
+                    W.getData()[i][j] = w;                    
                     synapse.setInputUid(uid);
                     synapse.setOutputUid(neuronList.get(j).getUid());                    
                     synapsList.add(synapse);  
