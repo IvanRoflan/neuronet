@@ -35,7 +35,7 @@ public class Layer {
     private String uid;
 
     /**
-     * Список нейронов
+     * Список нейронов, содежащихся в слое
      */
     private List<Neuron> neuronList = new ArrayList<>();
 
@@ -97,9 +97,13 @@ public class Layer {
      * @param vector добавляемый вектор метод
      */
     public List<Synapse> addInputVector(Vector vector) {
+        
+        // Создание списка синпсов
         List<Synapse> synapsList = new ArrayList<>();
 
         if (vector != null && vector.getData().length > 0) {
+            // Счетчик  количества синапсов, подключенных к вектору
+            //  
             int connectionCount = vector.getData().length * neuronList.size();
 
             System.out.println("Формирование [" + connectionCount + "] синапсов от вектора uid = [" + vector.getUid() + "] к слою [" + this.uid + "] номер слоя: " + layaerNumber);
@@ -110,12 +114,17 @@ public class Layer {
             int synapseCount = 0;
             List<Double> v = new ArrayList<>(vector.getData().length);
             
+            // Цикл поэлементного обхода вектора 
             for (int i = 0; i < v.size(); i++) {              
                 
                 sb.append(String.format("%-25s %-5s","Номер строки вектора ==> ", "["+i+"], "));                
                 sb.append("\n");
+                
+                // Цикл обхода 
                 for (int j = 0; j < neuronList.size(); j++) {
-                    sb.append(String.format("  %-15s %-7s","номер нейрона:", "["+j+"]"));                    
+                    sb.append(String.format("  %-15s %-7s","номер нейрона:", "["+j+"]")); 
+                    
+                    // Cоздание связи (синапс) между 
                     Synapse synapse = new Synapse();                    
                     synapse.setInputUid(uid);
                     synapse.setOutputUid(neuronList.get(j).getUid());                    
