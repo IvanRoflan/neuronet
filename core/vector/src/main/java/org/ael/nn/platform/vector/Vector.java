@@ -32,6 +32,12 @@ public class Vector {
     
     private final Map<Integer, String> dataIndexUidMap = new HashMap<>();
     
+    
+    /**
+     * Создание вектора из существущего входного массива
+     * 
+     * @param data 
+     */
     public Vector(double[] data) {
         this.uid = UUID.randomUUID().toString();
         int len = data.length;
@@ -60,6 +66,7 @@ public class Vector {
             for (int i = 0; i < size; i++) {
                 data[i] = (Double) Math.random() * 2 - 1;
             }
+            // Формирование уникального идентифкатора для каждой компоненты вектора
             for (int i = 0; i < data.length; i++) {
                 dataIndexUidMap.put(i, UUID.randomUUID().toString());
             }
