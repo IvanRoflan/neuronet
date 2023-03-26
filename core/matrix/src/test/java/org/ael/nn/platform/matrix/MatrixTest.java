@@ -18,10 +18,8 @@ public class MatrixTest {
     {
         double [][] input = {
             {0, 1, 2},
-            {1, 1, 5}
-            
+            {1, 1, 5}            
         };
-        
         
         Matrix m = new Matrix (input);
        

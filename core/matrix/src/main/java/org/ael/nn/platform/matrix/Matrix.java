@@ -62,7 +62,7 @@ public class Matrix {
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < columns; j++) {
                 sb.append(" ");
-                sb.append(String.format("%-12.3f",  data[i][j]));
+                sb.append(String.format("%12.3f",  data[i][j]));
             }
             sb.append("\n");
         }

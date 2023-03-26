@@ -43,14 +43,14 @@ public class Layer {
     /**
      * Список входных синапсов
      */
-    private List<Synapse> inputSynapses = new ArrayList<>();
+    private final List<Synapse> inputSynapses = new ArrayList<>();
     
     
     
     /**
-     * 
+     *  Матрица связей
      */
-    
+    private Matrix W;
     
     
       /**
@@ -103,12 +103,10 @@ public class Layer {
      *
      * @param vector добавляемый вектор метод
      */
-    public List<Synapse> addInputVector(Vector vector) {
+    public void addInputVector(Vector vector) {
         
-        // Создание списка синпсов
-        List<Synapse> synapsList = new ArrayList<>();
-
-       
+        // Очистка списка синапсов
+        inputSynapses.clear();
         
         if (vector != null && vector.getData().length > 0) {
             // Счетчик  количества синапсов, подключенных к вектору
@@ -116,48 +114,52 @@ public class Layer {
             int connectionCount = vector.getData().length * neuronList.size();
 
             // Создание матрицы синптических связей
-            Matrix W  = new Matrix (vector.getSize(),neuronList.size() );
-            
-            
+            W  = new Matrix (vector.getSize(),neuronList.size() );            
             System.out.println("Формирование [" + connectionCount + "] синапсов от вектора uid = [" + vector.getUid() + "] к слою [" + this.uid + "] номер слоя: " + layaerNumber);
 
             StringBuilder sb = new StringBuilder();
             sb.append("\n");            
             
             int synapseCount = 0;
-            List<Double> v = new ArrayList<>(vector.getData().length);
+            List<Double> v = new ArrayList<>();
+            for (int i = 0; i < vector.getData().length; i++) {
+                v.add(vector.getData()[i]);                
+                System.out.println("Добавлено значение в список "+vector.getData()[i]);
+            }
+            
+            System.out.println("Формирование "+v.size()+" синапсов для входного слоя...");
             
             // Цикл поэлементного обхода вектора 
             for (int i = 0; i < v.size(); i++) {              
                 
-                sb.append(String.format("%-25s %-5s","Номер строки вектора ==> ", "["+i+"], "));                
+                sb.append(String.format("%-25s %-5s","Номер строки вектора ==> ", "["+i+"]"));                
                 sb.append("\n");
                 
-                // Цикл обхода нейронов, входящих в слой
+               
+                  // Цикл обхода нейронов, входящих в слой
                 for (int j = 0; j < neuronList.size(); j++) {
                     sb.append(String.format("  %-15s %-7s","номер нейрона:", "["+j+"]")); 
-                    
-                    // Заполнение элементов матрицы синаптических связей
-                    
-                    // Cоздание связи (синапс) между 
-                    Synapse synapse = new Synapse();                    
+                    sb.append("\n");
+                    Synapse synapse = new Synapse();
+                    sb.append(String.format("%-35s %12.3f",  "Создан синапс c коэффциентом передачи: ", synapse.getW()));                                        
                     // Чтение веса (коэффциента в синапсе)
                     Double w = synapse.getW();
                     // Заполнение матрицы синаптических связей
                     W.getData()[i][j] = w;                    
-                    synapse.setInputUid(uid);
+                    synapse.setInputUid(vector.getDataIndexUidMap().get(i));
                     synapse.setOutputUid(neuronList.get(j).getUid());                    
-                    synapsList.add(synapse);  
+                    this.inputSynapses.add(synapse);  
                     synapseCount++;
                     sb.append(String.format("%-35s %-7s %s","["+synapseCount+"]-ая синаптическая связь:", "["+i+" "+j+"]", "uid = "+synapse.getUid()));
-                    sb.append("\n");
-                }
-                
-
+                    sb.append("\n");                                       
+                }               
             }
+            
             System.out.println(sb.toString());
+            System.out.println("Добавление вектора размером ["+vector.getData().length+"] элементов  к слою ["+this.layaerNumber+"] завершено" );   
+            System.out.println("Входной верктор: \n"+vector);   
+            System.out.println("Сформирована матрица синаптических связей: \n"+this.W);   
         }
-        return synapsList;
     }
     
     /**
@@ -165,6 +167,7 @@ public class Layer {
      * 
      * @param layer подключаемый слой
      */
+    @Deprecated
     public List<Synapse> connectToLayer(Layer layer) {
         List<Synapse> synapsList = new ArrayList<>();
         if (layer != null && layer.getNeuronList().size() != 0) {
@@ -203,6 +206,7 @@ public class Layer {
      *
      * @param v
      */
+    @Deprecated
     public void connectInputVector(Vector v) {
 
         if (v != null) {
@@ -244,6 +248,12 @@ public class Layer {
 
     }
 
+    public List<Synapse> getInputSynapses() {
+        return inputSynapses;
+    }
+
+    
+    
     
     public Integer getLayaerNumber() {
         return layaerNumber;

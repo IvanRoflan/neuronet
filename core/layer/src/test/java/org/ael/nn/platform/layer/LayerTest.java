@@ -30,7 +30,7 @@ public class LayerTest {
         Vector v1 = new Vector(4);
 
         // Добавление вектора 
-        List<Synapse> neuronInput = layer.addInputVector(v1);
+        layer.addInputVector(v1);
 
         // печать слоя на терминале
         System.out.println(layer);
@@ -61,17 +61,23 @@ public class LayerTest {
         }
     }
         
-    
     /**
      * Тест продключения входного вектора
-     */  
+     */
     @Test(priority = 3, groups = {"platform-core"})
     public void connectVectorToLayer() {
-        
+
         Layer inputLayer = new Layer(0, 1);
-        Vector v = new Vector(3);
-        inputLayer.connectInputVector(v);
         
+        // Формирование входного массива чисел
+        double [] inp = {0.7, 0.1, 0.3};
+        
+        Vector v = new Vector(inp);
+        
+        inputLayer.addInputVector(v);
+        System.out.println(inputLayer.getInputSynapses().size());
+        
+
     }
    
     

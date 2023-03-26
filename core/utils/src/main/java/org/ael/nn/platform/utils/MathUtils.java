@@ -64,6 +64,38 @@ public class MathUtils {
         return result;
     }
     
+     /**
+     * Умножение матрицы на вектор
+     * 
+     * @param matrix
+     * @param vector
+     * @return 
+     */
+    public static Double [] multiplication( Double[] vector, Double[][] matrix) {
+        Double [] result = new Double[matrix[0].length];
+        
+        System.out.println("Количесвто строк: "+matrix.length);
+        System.out.println("Количесвто столбцов: "+matrix[0].length);
+         
+        Double sum = 0.0;      
+         for (int i = 0; i < matrix.length; i++) {
+                
+                for (int j = 0; j < matrix[0].length; j++) {
+                    System.out.println("  i = ["+i+"], j = ["+j+"]");
+                    System.out.println(matrix[i][j]);
+                    sum = sum + matrix[i][j] * vector[i];
+                    result[j] = sum;                    
+                }
+                
+            }
+        
+        for (Double double1 : result) {
+            System.out.println(double1);
+        }
+
+        return result;
+    }
+    
     
     /**
      * Умножение матриц
