@@ -11,10 +11,17 @@ public class Matrix {
 
     private double[][] data;
     
-    private int rows;       // Количество  строк
-    private int columns;    // Количество столбцов
+    private final int rows;       // Количество  строк
+    private final int columns;    // Количество столбцов
 
-    public Matrix() {
+    public Matrix(double[][] data) {
+        this.data = data;
+        this.rows = data.length;
+        this.columns = data[0].length;
+    }
+
+    
+    public Matrix(int rows, int columns) {
         data = new double[rows][columns];
         this.rows = rows;
         this.columns = columns;
@@ -37,33 +44,29 @@ public class Matrix {
         return rows;
     }
 
-    public void setRows(int rows) {
-        this.rows = rows;
-    }
+    
 
     public int getColumns() {
         return columns;
     }
 
-    public void setColumns(int columns) {
-        this.columns = columns;
-    }
+   
 
     @Override
     public String toString() {
-        StringBuilder sb =new StringBuilder();
+        StringBuilder sb = new StringBuilder();
+        sb.append("\n");
+        sb.append("Матрица ["+this.rows+"] строк, ["+this.columns+"] столбцов");
+        sb.append("\n");
         
         for (int i = 0; i < rows; i++) {
-            
             for (int j = 0; j < columns; j++) {
                 sb.append(" ");
-                sb.append(""+data[i][j]);
-                
+                sb.append(String.format("%-12.3f",  data[i][j]));
             }
+            sb.append("\n");
         }
-        
-        
-        return sb.toString();        
+        return sb.toString();
     }
 
     
