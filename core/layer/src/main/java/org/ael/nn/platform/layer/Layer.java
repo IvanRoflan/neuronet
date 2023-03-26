@@ -47,6 +47,12 @@ public class Layer {
     
     
     
+    /**
+     * 
+     */
+    
+    
+    
       /**
      * Создание слоя нейронов
      *
@@ -110,9 +116,7 @@ public class Layer {
             int connectionCount = vector.getData().length * neuronList.size();
 
             // Создание матрицы синптических связей
-            Matrix W  = new Matrix ();
-            W.setRows(vector.getSize());
-            W.setColumns(neuronList.size());
+            Matrix W  = new Matrix (vector.getSize(),neuronList.size() );
             
             
             System.out.println("Формирование [" + connectionCount + "] синапсов от вектора uid = [" + vector.getUid() + "] к слою [" + this.uid + "] номер слоя: " + layaerNumber);

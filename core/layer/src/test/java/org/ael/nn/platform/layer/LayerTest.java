@@ -62,7 +62,9 @@ public class LayerTest {
     }
         
     
-      
+    /**
+     * Тест продключения входного вектора
+     */  
     @Test(priority = 3, groups = {"platform-core"})
     public void connectVectorToLayer() {
         
