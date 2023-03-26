@@ -10,8 +10,9 @@ package org.ael.nn.platform.matrix;
 public class Matrix {
 
     private double[][] data;
-    private int rows;
-    private int columns;
+    
+    private int rows;       // Количество  строк
+    private int columns;    // Количество столбцов
 
     public Matrix() {
         data = new double[rows][columns];
@@ -46,6 +47,23 @@ public class Matrix {
 
     public void setColumns(int columns) {
         this.columns = columns;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb =new StringBuilder();
+        
+        for (int i = 0; i < rows; i++) {
+            
+            for (int j = 0; j < columns; j++) {
+                sb.append(" ");
+                sb.append(""+data[i][j]);
+                
+            }
+        }
+        
+        
+        return sb.toString();        
     }
 
     

@@ -40,9 +40,10 @@ public class Vector {
      */
     public Vector(double[] data) {
         this.uid = UUID.randomUUID().toString();
-        int len = data.length;
+        // Определение размера вектора
+        this.size = data.length;
         
-        if (data != null && len != 0) {
+        if (data != null && this.size != 0) {
             this.data = data;
             // Формирование уникального идентифкатора для каждой компоненты вектора
             for (int i = 0; i < data.length; i++) {                
