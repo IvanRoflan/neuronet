@@ -14,6 +14,9 @@ public class Matrix {
     private final int rows;       // Количество  строк
     private final int columns;    // Количество столбцов
 
+    
+    // 1 й способ создания матрицы  - указание входного 2-х мерного
+    // массива
     public Matrix(double[][] data) {
         this.data = data;
         this.rows = data.length;
@@ -21,6 +24,8 @@ public class Matrix {
     }
 
     
+    // 2 й способ - указание размерности массива
+    //
     public Matrix(int rows, int columns) {
         data = new double[rows][columns];
         this.rows = rows;

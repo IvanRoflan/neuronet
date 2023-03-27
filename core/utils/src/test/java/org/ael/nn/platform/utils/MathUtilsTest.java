@@ -105,7 +105,7 @@ public class MathUtilsTest {
     @Ignore
     @Test(priority = 4, groups = {"platform-core"})
     public void matrixMultiplyByVector1() {
-        System.out.println("Начало теста умножения матрицы на вектор для расчета отклика нейрона");
+        System.out.println("Начало теста умножения матрицы");
 
         Double[][] a = {
             {-0.3, 3.1, 0.5},          
@@ -129,16 +129,19 @@ public class MathUtilsTest {
     public void matrixMultiplyByVector3() {
         System.out.println("Начало теста умножения матрицы на вектор для расчета отклика нейрона");
 
+        
+        // Входной вектор (учебник ст. 20)
         Double[] vector = {-0.3, 3.1, 0.5};
         
+        // Входная матрица
         Double[][] a = {
             {0.7},            
             {0.1},                      
             {0.3},                      
+            
         };
        
-
-        Double[] result = MathUtils.multiplication( vector, a);
+        Double[] result = MathUtils.vectorByMatrixMultiplication( vector, a);
 
 
         System.out.println("Вывод полученного вектора: \n");

@@ -15,6 +15,8 @@ import org.testng.annotations.Test;
  */
 public class LayerTest {
     
+   private int index = 0;
+    
     /**
      * Тест создания слоя нейронов
      */
@@ -67,15 +69,32 @@ public class LayerTest {
     @Test(priority = 3, groups = {"platform-core"})
     public void connectVectorToLayer() {
 
+        // Формирование слоя номер [0] c 1-м нейроном
+        // 
         Layer inputLayer = new Layer(0, 1);
         
         // Формирование входного массива чисел
         double [] inp = {0.7, 0.1, 0.3};
+        double [] w  = {-0.3, 3.1, 0.5};
         
+        // Сохдание вектора на основе массива чисел
         Vector v = new Vector(inp);
         
+        // Подлючение вектора к входному слою
         inputLayer.addInputVector(v);
-        System.out.println(inputLayer.getInputSynapses().size());
+        
+        index = -1;
+        inputLayer.getInputSynapses()
+                .stream()
+                .forEach(synapse
+                        -> {
+                    index++;
+                    synapse.setW(w[index]);
+                    System.out.println(synapse);
+                }
+                );
+        
+        
         
 
     }

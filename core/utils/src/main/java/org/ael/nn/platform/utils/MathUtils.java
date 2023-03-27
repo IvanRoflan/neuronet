@@ -64,35 +64,42 @@ public class MathUtils {
         return result;
     }
     
-     /**
+    /**
      * Умножение матрицы на вектор
-     * 
+     *
      * @param matrix
      * @param vector
-     * @return 
+     * @return
      */
-    public static Double [] multiplication( Double[] vector, Double[][] matrix) {
-        Double [] result = new Double[matrix[0].length];
-        
-        System.out.println("Количесвто строк: "+matrix.length);
-        System.out.println("Количесвто столбцов: "+matrix[0].length);
-         
-        Double sum = 0.0;      
-         for (int i = 0; i < matrix.length; i++) {
-                
-                for (int j = 0; j < matrix[0].length; j++) {
-                    System.out.println("  i = ["+i+"], j = ["+j+"]");
-                    System.out.println(matrix[i][j]);
-                    sum = sum + matrix[i][j] * vector[i];
-                    result[j] = sum;                    
-                }
-                
+    public static Double[] vectorByMatrixMultiplication(Double[] vector, Double[][] matrix) {
+        // Выходной вектор
+        Double[] result = new Double[matrix[0].length];
+
+        System.out.println("Количесвто строк: " + matrix.length);
+        System.out.println("Количесвто столбцов: " + matrix[0].length);
+
+        Double sum = 0.0;
+        for (int i = 0; i < matrix.length; i++) {
+
+            for (int j = 0; j < matrix[0].length; j++) {
+                System.out.println("  i = [" + i + "], j = [" + j + "]");
+                System.out.println(matrix[i][j]);
+                sum = sum + matrix[i][j] * vector[i];
+                result[j] = sum;
             }
-        
-        for (Double double1 : result) {
-            System.out.println(double1);
+
         }
 
+        System.out.println("Размерность выходного вектора: "+result.length);
+        StringBuilder sb = new StringBuilder();
+        sb.append("\n [");
+        for (Double s : result) {            
+            sb.append(String.format("%12.3f", s));            
+            sb.append("    ");                        
+        }
+        sb.append("]");
+        System.out.println(sb.toString());
+        
         return result;
     }
     

@@ -46,6 +46,11 @@ public class Layer {
     private final List<Synapse> inputSynapses = new ArrayList<>();
     
     
+     /**
+     * Список входных синапсов
+     */
+    private final List<Synapse> outputSynapses = new ArrayList<>();
+    
     
     /**
      *  Матрица связей
@@ -53,11 +58,11 @@ public class Layer {
     private Matrix W;
     
     
-      /**
+    /**
      * Создание слоя нейронов
      *
-     * @param layaerNumber количество
-     * @param neuronCount
+     * @param layaerNumber номер слоя
+     * @param neuronCount  количество нейронов в слое
      */
     public Layer(Integer layaerNumber, Integer neuronCount) {
 
@@ -130,12 +135,9 @@ public class Layer {
             System.out.println("Формирование "+v.size()+" синапсов для входного слоя...");
             
             // Цикл поэлементного обхода вектора 
-            for (int i = 0; i < v.size(); i++) {              
-                
+            for (int i = 0; i < v.size(); i++) {                              
                 sb.append(String.format("%-25s %-5s","Номер строки вектора ==> ", "["+i+"]"));                
-                sb.append("\n");
-                
-               
+                sb.append("\n");                
                   // Цикл обхода нейронов, входящих в слой
                 for (int j = 0; j < neuronList.size(); j++) {
                     sb.append(String.format("  %-15s %-7s","номер нейрона:", "["+j+"]")); 
