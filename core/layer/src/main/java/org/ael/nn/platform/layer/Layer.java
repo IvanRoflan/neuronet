@@ -10,6 +10,8 @@ import org.ael.nn.platform.vector.Vector;
 
 /**
  * Класс для представления слоев нейронной сети 
+ * Слой нейронной сети может содержать список нейронов или вектор
+ * 
  * 
  * @author vaganovdv
  */
@@ -44,6 +46,7 @@ public class Layer {
      * Список входных синапсов
      */
     private final List<Synapse> inputSynapses = new ArrayList<>();
+    
     
     
      /**
