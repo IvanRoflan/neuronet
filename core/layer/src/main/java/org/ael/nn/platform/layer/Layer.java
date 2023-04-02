@@ -56,6 +56,13 @@ public class Layer {
     
     
     /**
+     * Вектор, содержащийсвя в слое
+     */
+    private Vector vector;
+    
+    
+    
+    /**
      *  Матрица связей
      */
     private Matrix W;
