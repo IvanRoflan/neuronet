@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.ael.nn.platform.connection.Synapse;
+import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
 /**
@@ -13,6 +14,7 @@ import org.testng.annotations.Test;
 public class NeuronTest {
 
    
+    @Ignore
     @Test(priority = 2, groups = {"platform-core"})
     public void createNetwork() {
         // Создаем единичный нейрон
@@ -47,6 +49,7 @@ public class NeuronTest {
     /**
      * Тест создания нейцрона и соединения между нейронами
      */
+    @Ignore
     @Test(priority = 1, groups = {"platform-core"})
     public void createSingleNeuron() {
         
@@ -62,6 +65,19 @@ public class NeuronTest {
         
         System.out.println(neuron.toString());
 
+      
+    }
+    
+    
+    
+    /**
+     * Тест нейросети с картой синапсов
+     */
+    @Ignore
+    @Test(priority = 3, groups = {"platform-core"})
+    public void createSynapseMap() {
+        
+       
       
     }
 

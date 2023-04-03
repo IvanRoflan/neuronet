@@ -41,7 +41,7 @@ public class Network {
      private final Map <Integer, Layer> layerMap = new ConcurrentHashMap<>();
     
     /**
-     * Список синапсов 
+     * Карта синапсов
      * 
      */
     private final Map <String, Synapse> synapseMap = new ConcurrentHashMap<>();
@@ -199,6 +199,14 @@ public class Network {
             System.out.println("Ошибка добавления слоя: слой с номером [] сущесвует в сети, uid сети = ["+this.uid+"]");            
         }
         return result;
+    }
+
+    public String getUid() {
+        return uid;
+    }
+
+    public Map<String, Synapse> getSynapseMap() {
+        return synapseMap;
     }
     
     

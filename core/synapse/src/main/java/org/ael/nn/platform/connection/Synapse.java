@@ -10,9 +10,9 @@ public class Synapse {
     
     
     /**
-     * Идентификатор соединения 
+     * Идентификатор соединения (синапса)
      */
-    private String uid;  
+    private final String uid;  
     
     /**
      * Коэффциент передачи связи 
@@ -46,10 +46,7 @@ public class Synapse {
         return uid;
     }
 
-    public void setUid(String uid) {
-        this.uid = uid;
-    }
-
+  
     public Double getW() {
         return w;
     }
