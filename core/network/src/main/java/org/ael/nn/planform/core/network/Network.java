@@ -71,6 +71,12 @@ public class Network {
             connectVectorLayerToNeuronLayer(layer1, layer2);
         }
         
+        
+        
+        if (layer1.getNeuronCount() > 0 && layer2.getNeuronCount() > 0) {
+            connectNeuronLayerToNeuronLeayer(layer1, layer2);
+        }
+
 
         return result;
     }
@@ -140,8 +146,58 @@ public class Network {
 
         return result;
     }
-            
-            
+        
+
+ private boolean connectNeuronLayerToNeuronLeayer(Layer l1, Layer l2) {
+        boolean result = false;
+
+        List<Neuron> neuronListL1 = l1.getNeuronList();
+        List<Neuron> neuronListL2 = l2.getNeuronList();
+
+        if ((neuronListL1 != null && neuronListL1.size() != 0) || (neuronListL2 != null && neuronListL2.size() != 0)) {
+            // Счетчик  количества синапсов, подключенных к вектору
+            //  
+            int connectionCount = neuronListL1.size() * neuronListL2.size();
+
+            StringBuilder sb = new StringBuilder();
+            sb.append("\n");
+
+            int synapseCount = 0;
+
+            sb.append(String.format("%-25s %-7s", "Количество нейронов в первом слое", "[" + neuronListL1.size() + "]"));
+            sb.append("\n");
+            sb.append(String.format("%-25s %-7s", "Количество нейронов во втором слое", "[" + neuronListL2.size() + "]"));
+            sb.append("\n");
+            sb.append(String.format("%-25s %-7s", "Количество синапсов", "[" + connectionCount + "]"));
+            sb.append("\n");
+
+            for (int i = 0; i < neuronListL1.size(); i++) {
+                sb.append(String.format("%-25s %-7s", "Соединение нейрона первого слоя ==> ", "[" + i + "]"));
+                sb.append("\n");
+                for (int j = 0; j < neuronListL2.size(); j++) {
+                    Synapse synapse = new Synapse();
+                    // Чтение веса (коэффциента в синапсе)
+                    Double w = synapse.getW();
+                    synapse.setInputUid(neuronListL1.get(i).getUid());
+                    synapse.setOutputUid(neuronListL2.get(j).getUid());
+                    synapseCount++;
+                    sb.append(String.format("%-15s %-15s %-15s %12.3f %-15s", "Создан синапс ", "[" + synapseCount + "]", " c коэффциентом передачи: ", synapse.getW(), "нейрон входа[" + j + "]"));
+                    sb.append("\n");
+
+                    String synapseUid = synapse.getUid();
+                    synapseMap.put(synapseUid, synapse);
+                    l1.getOutputSynapsesIdList().add(synapseUid);
+                    l2.getInputSynapsesIdList().add(synapseUid);
+                }
+            }
+            System.out.println(sb.toString());
+        }
+        return result;
+    }
+    
+   
+    
+    
             
     public void calculate()            
     {
