@@ -65,18 +65,27 @@ public class Network {
 
         Layer layer1 = layerMap.get(layerNumber1);
         Layer layer2 = layerMap.get(layerNumber2);
-        
-        if (layer1.getVector() != null && layer2.getNeuronCount() >0)
-        {
+
+        /**
+         * подключение слоя векторов(layer1) к слою нейронов (layer2)
+         */
+        if (layer1.getVector() != null && layer2.getNeuronCount() > 0) {
             connectVectorLayerToNeuronLayer(layer1, layer2);
         }
-        
-        
-        
+
+        /**
+         * подключение слоя нейров(layer1) к слою нейронов (layer2)
+         */
         if (layer1.getNeuronCount() > 0 && layer2.getNeuronCount() > 0) {
             connectNeuronLayerToNeuronLeayer(layer1, layer2);
         }
 
+        /**
+         * подключение слоя нейров(layer1) к слою векторов (layer2)
+         */
+        if (layer1.getNeuronCount() > 0 && layer2.getVector() != null) {
+            this.connectNeuronLayerToVectorLeayer(layer1, layer2);
+        }
 
         return result;
     }
@@ -147,6 +156,54 @@ public class Network {
         return result;
     }
         
+    /**
+     * Формирование списка синапсов для подключения слоя нейронов к слою
+     * векторному
+     *
+     * @param l1 слой нейронов
+     * @param l2 векторный слой
+     * @return
+     */
+    public boolean connectNeuronLayerToVectorLeayer(Layer l1, Layer l2) {
+        boolean result = false;
+
+        System.out.println("Соедиенение слоя нейронов с векторным слоем...");
+
+        // Получение списка нейронов из слоя нейронов
+        List<Neuron> neuronList = l1.getNeuronList();
+        Vector vector = l2.getVector();
+
+        for (int i = 0; i < neuronList.size(); i++) {
+            System.out.println("Обход списка нейронов, номер нейрона [" + i + "]");
+
+            for (int j = 0; j < vector.getData().length; j++) {
+                System.out.println("Обход списка элементов векторов, элемент [" + j + "]");
+
+                Synapse synapse = new Synapse();
+
+                // Получение идентификатора элемена вектора с иденксом j
+                String vectorUid = vector.getDataIndexUidMap().get(j);
+                System.out.println("Формирование правого подключения элемент вектора [" + j + "] uid вектора [" + vectorUid + "]");
+
+                String neuronUid = neuronList.get(i).getUid();
+                System.out.println("Формирование левого подключения нейрона [" + i + "] uid нейрона [" + neuronUid + "]");
+                synapse.setOutputUid(vectorUid);
+                synapse.setInputUid(neuronUid);
+                
+                
+                synapseMap.put(synapse.getUid(), synapse);
+                l1.getOutputSynapsesIdList().add(synapse.getUid());
+                l2.getInputSynapsesIdList().add(synapse.getUid());                
+
+            }
+        }
+        
+        
+        
+
+        return result;
+    }
+
 
  private boolean connectNeuronLayerToNeuronLeayer(Layer l1, Layer l2) {
         boolean result = false;
