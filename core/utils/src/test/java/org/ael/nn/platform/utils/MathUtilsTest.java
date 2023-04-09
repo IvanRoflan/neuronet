@@ -131,10 +131,10 @@ public class MathUtilsTest {
 
         
         // Входной вектор (учебник ст. 20)
-        Double[] vector = {-0.3, 3.1, 0.5};
+        double[] vector = {-0.3, 3.1, 0.5};
         
         // Входная матрица
-        Double[][] a = {
+        double[][] a = {
             {0.7},            
             {0.1},                      
             {0.3},                      

@@ -71,7 +71,7 @@ public class MathUtils {
      * @param vector
      * @return
      */
-    public static Double[] vectorByMatrixMultiplication(Double[] vector, Double[][] matrix) {
+    public static Double[] vectorByMatrixMultiplication(double[] vector, double[][] matrix) {
         // Выходной вектор
         Double[] result = new Double[matrix[0].length];
 

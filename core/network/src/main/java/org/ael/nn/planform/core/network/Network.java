@@ -12,6 +12,7 @@ import org.ael.nn.planform.core.neuron.Neuron;
 import org.ael.nn.platform.connection.Synapse;
 import org.ael.nn.platform.layer.Layer;
 import org.ael.nn.platform.matrix.Matrix;
+import org.ael.nn.platform.utils.MathUtils;
 import org.ael.nn.platform.vector.Vector;
 
 /**
@@ -273,6 +274,11 @@ public class Network {
         return result;
     }
 
+    
+    /**
+     * Вычисление отклика (выхода) нейронной сети
+     * 
+     */
     public void calculate() {
 
         StringBuilder sb = new StringBuilder();
@@ -283,24 +289,39 @@ public class Network {
 
         System.out.println(sb.toString());
 
-            
-        
-        Layer layer1 = this.layerMap.get(0);
-        Layer layer2 = this.layerMap.get(1);
-        
-        String key = layer1.getUid().trim()+":"+layer2.getUid().trim();
-        if (this.synapseMatrixMap.containsKey(key))
-        {
-            System.out.println("Прочина синаптческая матрица, соединяющая сети слои: {"+layer1.getLayaerNumber()+", "+layer2.getLayaerNumber()+"} идентификатор матрицы: "+key);
-            System.out.println(synapseMatrixMap.get(key));
-        }    
-        else
-        {
-            System.out.println("Ошибка: не найдена синаптическая матрица весов, соотвествующая ключу: "+key);
-        }        
-        
-    }
+        int k = 0;
+        for (int i = 0; i < layerMap.size() - 1; i++) {
 
+            k = i + 1;
+            System.out.println("Формирование матрицы для слоев [" + i + "] и [" + k + "] ...");
+
+            Layer layer1 = this.layerMap.get(i);
+            Layer layer2 = this.layerMap.get(k);
+
+            String key = layer1.getUid().trim() + ":" + layer2.getUid().trim();
+            if (this.synapseMatrixMap.containsKey(key)) {
+                System.out.println("Прочитана синаптическая матрица, соединяющая слои: {" + layer1.getLayaerNumber() + ", " + layer2.getLayaerNumber() + "} идентификатор матрицы: " + key);
+                Matrix m = synapseMatrixMap.get(key);
+                
+                System.out.println(m);
+                if (layer1.getVector() != null)
+                {
+                   if (!layer2.getNeuronList().isEmpty()) 
+                   {
+                       System.out.println("Умножение вектора слоя ["+i+"] на матрицу соединяющую слои ["+i+"] и  ["+k+"] ...");
+                       MathUtils.vectorByMatrixMultiplication(layer1.getVector().getData(), m.getData());
+                       
+                   }
+                }  
+                
+            } else {
+                System.out.println("Ошибка: не найдена синаптическая матрица весов, соотвествующая ключу: " + key);
+            }
+
+        }
+
+    }
+        
 
     /**
      * Добавление слоя в сеть
