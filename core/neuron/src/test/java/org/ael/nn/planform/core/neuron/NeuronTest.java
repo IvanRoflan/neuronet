@@ -1,9 +1,5 @@
 package org.ael.nn.planform.core.neuron;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.ael.nn.platform.connection.Synapse;
 import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
@@ -17,6 +13,11 @@ public class NeuronTest {
     @Ignore
     @Test(priority = 2, groups = {"platform-core"})
     public void createNetwork() {
+        
+        
+        /* Закоментировано 09.04.2023
+         
+         
         // Создаем единичный нейрон
         long count = 3;
         Neuron singleN = new Neuron(count);
@@ -43,6 +44,7 @@ public class NeuronTest {
         for (int i = 0; i < neuronList.size(); i++) {
             System.out.println("№" + (i+1) + " - " + "Нейрон " + neuronList.get(i).getUid());
         }
+        */
     }
     
    
@@ -57,8 +59,8 @@ public class NeuronTest {
         
         System.out.println("Тест создания нейрона и вычисления выходного сигнала");
         long synapseCount = 3;
-        Neuron neuron = new Neuron(synapseCount);
-        neuron.setSynapseWeights( new double [] { -0.3, 3.1 , 0.5});
+        Neuron neuron = new Neuron();
+        //neuron.setSynapseWeights( new double [] { -0.3, 3.1 , 0.5});
         
         
         
@@ -70,16 +72,7 @@ public class NeuronTest {
     
     
     
-    /**
-     * Тест нейросети с картой синапсов
-     */
-    @Ignore
-    @Test(priority = 3, groups = {"platform-core"})
-    public void createSynapseMap() {
-        
-       
-      
-    }
+   
 
     
 

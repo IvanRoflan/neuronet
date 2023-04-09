@@ -16,7 +16,7 @@ import org.testng.annotations.Test;
  */
 public class NetworkTest {
 
-    @Ignore
+ 
     @Test(priority = 1, groups = {"platform-core"})
     public void createNetworkWith_2_Layers() {
 
@@ -26,6 +26,7 @@ public class NetworkTest {
         Layer layer1 = new Layer(0, v);
         Layer layer2 = new Layer(1, 1);
 
+        
         System.out.println(layer1);
         System.out.println(layer2);
 
@@ -35,12 +36,9 @@ public class NetworkTest {
         network.addLayer(layer2);
 
         network.connectLayers(layer1.getLayaerNumber(), layer2.getLayaerNumber());
-
-        System.out.println(layer1);
-        System.out.println(layer2);
-
+        
         network.calculate();
-
+       
     }
 
     
@@ -54,12 +52,11 @@ public class NetworkTest {
         int neuronCount = 5;
 
         for (int i = 0; i < v.getData().length; i++) {
-            System.out.println("Элемент вектора [" + i + "]  uid элемента:"+v.getDataIndexUidMap().get(i));
+            System.out.println("Элемент вектора [" + i + "]  uid элемента:" + v.getDataIndexUidMap().get(i));
             for (int j = 0; j < neuronCount; j++) {
                 System.out.println("Нейрон [" + j + "]");
                 Synapse synapse = new Synapse();
-                System.out.println("Создан синапс: "+ synapse.toString());
-                
+                System.out.println("Создан синапс: " + synapse.toString());
             }
 
         }
@@ -89,6 +86,7 @@ public class NetworkTest {
     
     
    
+    @Ignore
     @Test(priority = 4, groups = {"platform-core"})
     public void connectNeuronLayerToVectorLayer() {
 

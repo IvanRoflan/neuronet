@@ -3,11 +3,9 @@ package org.ael.nn.planform.core.neuron;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import org.ael.nn.platform.connection.Synapse;
-import org.ael.nn.platform.vector.Vector;
 
 
 
@@ -68,6 +66,8 @@ public class Neuron {
      * 
      * @param weights 
      */
+    
+    /*
     public void  setSynapseWeights (double [] weights)
     {
  
@@ -89,19 +89,13 @@ public class Neuron {
             }
         
         }
-   
     }
+    */
     
   
     
     
-    
-    /**
-     * Список входных связей
-     *
-     */
-    private List<Synapse> synapses = new ArrayList<>();
-
+   
     /**
      *
      */
@@ -111,36 +105,10 @@ public class Neuron {
         this.uid = UUID.randomUUID().toString();
     }
 
-    /**
-     * Добавление синапса
-     *
-     * @param synapse
-     */
-    public void addSynapse(Synapse synapse) {
-        if (synapse != null) {
-            synapses.add(synapse);
-        }
-    }
-
-    public List<Synapse> getSynapses() {
-        return synapses;
-    }
     
     
-    /**
-     * Конструктор класса 
-     * 
-     * @param synapseCount 
-     */
-    public Neuron(Long synapseCount) {
-        this.uid = UUID.randomUUID().toString();
-        if (synapseCount != null && synapseCount > 0) {
-            for (int i = 0; i < synapseCount; i++) {
-                synapses.add(new Synapse());
-            }
-        }
-    }
-
+    
+   
     /**
      * Вычисление выхода нейрона
      * печать матрицы (вектора)
@@ -171,7 +139,7 @@ public class Neuron {
 
     @Override
     public String toString() {
-        return "Нейрон uid = " + uid + ", количество входных синапсов: [" +synapses.size()+ "]";
+        return "Нейрон uid = " + uid;
     }
 
     /**
