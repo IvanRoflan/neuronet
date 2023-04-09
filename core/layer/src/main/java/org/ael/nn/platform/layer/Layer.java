@@ -57,7 +57,12 @@ public class Layer {
      * Вектор, содержащийсвя в слое
      */
     private Vector vector = null;
+
+    public Layer() {
+    }
   
+    
+    
     
     /**
      * Создание слоя нейронов, содержащего список нейронов

@@ -38,8 +38,7 @@ public class Synapse {
         
         // Генерация случайного идентификатора, преобразование идентификатора в строку
         this.uid = UUID.randomUUID().toString();       
-        this.w = (Double) Math.random() * 2 - 1;        
-        
+        this.w = (Double) Math.random() * 2 - 1;                
     }
 
     public String getUid() {

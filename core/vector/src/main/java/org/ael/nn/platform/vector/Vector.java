@@ -31,6 +31,11 @@ public class Vector {
     private double [] data;
     
     private final Map<Integer, String> dataIndexUidMap = new HashMap<>();
+
+    public Vector() {
+    }
+    
+    
     
     
     /**

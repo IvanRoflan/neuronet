@@ -14,6 +14,7 @@
         <module>matrix</module>
         <module>utils</module>
         <module>data-loader</module>
+        <module>database</module>
     </modules>
     
     

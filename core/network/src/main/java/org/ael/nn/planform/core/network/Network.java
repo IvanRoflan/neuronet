@@ -23,6 +23,8 @@ import org.ael.nn.platform.vector.Vector;
  */
 public class Network {
 
+    
+    private String name; 
     private final String uid;
 
     public Network() {
@@ -52,6 +54,17 @@ public class Network {
         return layerMap;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    
+    
+    
     /**
      * Соединение 2-х слоев
      *

@@ -3,9 +3,7 @@ package org.ael.nn.planform.core.neuron;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
-import java.util.List;
 import java.util.UUID;
-import org.ael.nn.platform.connection.Synapse;
 
 
 
