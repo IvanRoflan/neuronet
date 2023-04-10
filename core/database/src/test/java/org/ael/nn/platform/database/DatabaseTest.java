@@ -48,8 +48,10 @@ public class DatabaseTest {
         network.connectLayers(layer1.getLayaerNumber(), layer2.getLayaerNumber());
         
         
-        
+        //Запись нейросети в файл
         Database.writeNerworkToFile(network, graphFile);
+        
+        // Чтение нейросети из файла
         Database.readNerworkFromFile(graphFile);
        
        

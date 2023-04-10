@@ -17,33 +17,76 @@ import org.testng.annotations.Test;
 public class NetworkTest {
 
  
+    /**
+     * тест создания нейросети с 2-мя слоями
+     */
+    @Ignore
     @Test(priority = 1, groups = {"platform-core"})
     public void createNetworkWith_2_Layers() {
 
         // Входной вектор 
         double[] data = {-0.3, 3.1, 0.5};
-        Vector v = new Vector(data);
-        Layer layer1 = new Layer(0, v);
-        Layer layer2 = new Layer(1, 1);
-
+        Vector vector = new Vector(data);
+        // Создание векторного слоя
+        Layer layer1 = new Layer(0, vector);
         
+        // Создание нейронного слоя
+        Layer layer2 = new Layer(1, 3);
+
+        // Вывод на печать слоев
         System.out.println(layer1);
         System.out.println(layer2);
 
+        // Создание нейросети
         Network network = new Network();
 
+        //  Добавление слоев в нейросеть
         network.addLayer(layer1);
         network.addLayer(layer2);
 
         network.connectLayers(layer1.getLayaerNumber(), layer2.getLayaerNumber());
         
-        network.calculate();
+        //network.calculate();
        
     }
 
     
-    @Ignore
+     /**
+     * тест создания нейросети с 2-мя слоями
+     */
     @Test(priority = 2, groups = {"platform-core"})
+    public void connectNeuronAndVectorLayer() {
+
+        // Входной вектор 
+        double[] data = {-0.3, 3.1, 0.5};
+        Vector vector = new Vector(data);
+        // Создание векторного слоя
+        Layer layer1 = new Layer(1, 3);
+                
+        
+        // Создание нейронного слоя
+        Layer layer2 = new Layer(0, vector);
+
+        // Вывод на печать слоев
+        System.out.println(layer1);
+        System.out.println(layer2);
+
+        // Создание нейросети
+        Network network = new Network();
+
+        //  Добавление слоев в нейросеть
+        network.addLayer(layer1);
+        network.addLayer(layer2);
+
+        network.connectLayers(layer1.getLayaerNumber(), layer2.getLayaerNumber());
+        
+        //network.calculate();
+       
+    }
+    
+    
+    @Ignore
+    @Test(priority = 3, groups = {"platform-core"})
     public void connectLayers() {
 
         double[] data = {-0.3, 3.1, 0.5};
@@ -64,7 +107,7 @@ public class NetworkTest {
     }
 
     @Ignore
-    @Test(priority = 3, groups = {"platform-core"})
+    @Test(priority = 4, groups = {"platform-core"})
     public void createSynapseMap() {
 
         Synapse s1 = new Synapse();

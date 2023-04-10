@@ -23,8 +23,7 @@ import org.ael.nn.platform.vector.Vector;
  */
 public class Network {
 
-    
-    private String name; 
+    private String name;
     private final String uid;
 
     public Network() {
@@ -47,6 +46,7 @@ public class Network {
 
     /**
      * Карта матриц синаптических связей
+     *
      */
     private final Map<String, Matrix> synapseMatrixMap = new ConcurrentHashMap<>();
 
@@ -62,9 +62,6 @@ public class Network {
         this.name = name;
     }
 
-    
-    
-    
     /**
      * Соединение 2-х слоев
      *
@@ -102,7 +99,7 @@ public class Network {
     }
 
     /**
-     * Соедиенние векторного слоя со слоем нейронной сети
+     * Соедиение векторного слоя со слоем нейронной сети
      *
      * @param layer1
      * @param layer2
@@ -137,15 +134,14 @@ public class Network {
             sb.append(String.format("%-25s %-7s", "Количество синапсов", "[" + connectionCount + "]"));
             sb.append("\n");
 
-            // Создание матрицы связей                         
+            // Создание матрицы синаптических связей между слоями                        
             Matrix m = new Matrix(vector.getData().length, neuronList.size());
-                
-            
+
             // Цикл поэлементного обхода вектора 
             for (int i = 0; i < v.size(); i++) {
                 sb.append(String.format("%-25s %-7s", "Соединение ячейки вектора ==> ", "[" + i + "]"));
                 sb.append("\n");
-                
+
                 // Цикл обхода нейронов, входящих в слой
                 for (int j = 0; j < neuronList.size(); j++) {
 
@@ -153,13 +149,12 @@ public class Network {
 
                     // Чтение веса (коэффциента в синапсе)
                     Double w = synapse.getW();
-                    
                     m.getData()[i][j] = w;
-                    
+
                     synapse.setInputUid(vector.getDataIndexUidMap().get(i));
                     synapse.setOutputUid(neuronList.get(j).getUid());
                     synapseCount++;
-                    sb.append(String.format("%-15s %-15s %-15s %12.3f %-15s", "Создан синапс ", "[" + synapseCount + "]", " c коэффциентом передачи: ", synapse.getW(), "нейрон [" + j + "]"));                    
+                    sb.append(String.format("%-15s %-15s %-15s %12.3f %-15s", "Создан синапс ", "[" + synapseCount + "]", " c коэффциентом передачи: ", synapse.getW(), "нейрон [" + j + "]"));
                     sb.append("\n");
 
                     String synapseUid = synapse.getUid();
@@ -168,17 +163,17 @@ public class Network {
                     layer2.getOutputSynapsesIdList().add(synapseUid);
                 }
             }
-            
+
             // Запись матрицы синаптических связей
-            String matrixKey = layer1.getUid().trim()+":"+layer2.getUid().trim();
+            String matrixKey = layer1.getUid().trim() + ":" + layer2.getUid().trim();
             this.synapseMatrixMap.put(matrixKey, m);
-            sb.append(String.format("%-15s %-15s %-15s %s", "Матрица сязей", "слой [" + layer1.getLayaerNumber() + "]",  "слой [" + layer2.getLayaerNumber() + "]", "ключ: "+matrixKey));            
+            sb.append(String.format("%-15s %-15s %-15s %s", "Матрица сязей", "слой [" + layer1.getLayaerNumber() + "]", "слой [" + layer2.getLayaerNumber() + "]", "ключ: " + matrixKey));
             sb.append("\n");
-            sb.append(String.format("%-15s %-15s %-15s %s", "Соединение", "слой [" + layer1.getLayaerNumber() + "]",  "слой [" + layer2.getLayaerNumber() + "]", "ЗАВЕРШЕНО"));            
+            sb.append(String.format("%-15s %-15s %-15s %s", "Соединение", "слой [" + layer1.getLayaerNumber() + "]", "слой [" + layer2.getLayaerNumber() + "]", "ЗАВЕРШЕНО"));
             sb.append("\n");
             System.out.println(sb.toString());
             System.out.println(m);
-            
+
         }
 
         return result;
@@ -197,13 +192,26 @@ public class Network {
 
         System.out.println("Соедиенение слоя нейронов с векторным слоем...");
 
+        StringBuilder sb = new StringBuilder();
+        sb.append("\n");
+
         // Получение списка нейронов из слоя нейронов
         List<Neuron> neuronList = l1.getNeuronList();
         Vector vector = l2.getVector();
 
         // Создание матрицы связей                         
-        Matrix m = new Matrix(vector.getData().length, neuronList.size());
+        Matrix m = new Matrix(neuronList.size(), vector.getData().length);
+
+        int connectionCount = neuronList.size()*vector.getData().length;
         
+        sb.append("\n");
+        sb.append(String.format("%-25s %-7s", "Количество нейронов", "[" + neuronList.size() + "]"));
+        sb.append("\n");
+        sb.append(String.format("%-25s %-7s", "Размерность вектора", "[" + vector.getData().length + "]"));
+        sb.append("\n");
+        sb.append(String.format("%-25s %-7s", "Количество синапсов", "[" + connectionCount + "]"));
+        sb.append("\n");
+
         for (int i = 0; i < neuronList.size(); i++) {
             System.out.println("Обход списка нейронов, номер нейрона [" + i + "]");
 
@@ -211,6 +219,10 @@ public class Network {
                 System.out.println("Обход списка элементов векторов, элемент [" + j + "]");
 
                 Synapse synapse = new Synapse();
+
+                // Чтение веса (коэффциента в синапсе)
+                Double w = synapse.getW();
+                m.getData()[i][j] = w;
 
                 // Получение идентификатора элемена вектора с иденксом j
                 String vectorUid = vector.getDataIndexUidMap().get(j);
@@ -224,21 +236,31 @@ public class Network {
                 synapseMap.put(synapse.getUid(), synapse);
                 l1.getOutputSynapsesIdList().add(synapse.getUid());
                 l2.getInputSynapsesIdList().add(synapse.getUid());
-
             }
         }
-        
-        
+
+        // Создание уникального идентифкатора матрицы синаптических связей
+        String matrixKey = l1.getUid().trim() + ":" + l2.getUid().trim();
+
+        // Сохранение сформированной матрицы синаптических связей в карте матриц
+        this.synapseMatrixMap.put(matrixKey, m);
+
+        sb.append(String.format("%-15s %-15s %-15s %s", "Матрица сязей", "слой [" + l1.getLayaerNumber() + "]", "слой [" + l2.getLayaerNumber() + "]", "ключ: " + matrixKey));
+        sb.append("\n");
+        sb.append(String.format("%-15s %-15s %-15s %s", "Соединение", "слой [" + l1.getLayaerNumber() + "]", "слой [" + l2.getLayaerNumber() + "]", "ЗАВЕРШЕНО"));
+        sb.append("\n");
+        System.out.println(sb.toString());
+        System.out.println(m);
+
         return result;
     }
 
-    
     /**
      * Соединение 2-х слоев, соодрежащих нейроны
-     * 
+     *
      * @param l1
      * @param l2
-     * @return 
+     * @return
      */
     private boolean connectNeuronLayerToNeuronLeayer(Layer l1, Layer l2) {
         boolean result = false;
@@ -287,10 +309,9 @@ public class Network {
         return result;
     }
 
-    
     /**
      * Вычисление отклика (выхода) нейронной сети
-     * 
+     *
      */
     public void calculate() {
 
@@ -315,18 +336,16 @@ public class Network {
             if (this.synapseMatrixMap.containsKey(key)) {
                 System.out.println("Прочитана синаптическая матрица, соединяющая слои: {" + layer1.getLayaerNumber() + ", " + layer2.getLayaerNumber() + "} идентификатор матрицы: " + key);
                 Matrix m = synapseMatrixMap.get(key);
-                
+
                 System.out.println(m);
-                if (layer1.getVector() != null)
-                {
-                   if (!layer2.getNeuronList().isEmpty()) 
-                   {
-                       System.out.println("Умножение вектора слоя ["+i+"] на матрицу соединяющую слои ["+i+"] и  ["+k+"] ...");
-                       MathUtils.vectorByMatrixMultiplication(layer1.getVector().getData(), m.getData());
-                       
-                   }
-                }  
-                
+                if (layer1.getVector() != null) {
+                    if (!layer2.getNeuronList().isEmpty()) {
+                        System.out.println("Умножение вектора слоя [" + i + "] на матрицу соединяющую слои [" + i + "] и  [" + k + "] ...");
+                        MathUtils.vectorByMatrixMultiplication(layer1.getVector().getData(), m.getData());
+
+                    }
+                }
+
             } else {
                 System.out.println("Ошибка: не найдена синаптическая матрица весов, соотвествующая ключу: " + key);
             }
@@ -334,7 +353,6 @@ public class Network {
         }
 
     }
-        
 
     /**
      * Добавление слоя в сеть
@@ -361,8 +379,5 @@ public class Network {
     public Map<String, Synapse> getSynapseMap() {
         return synapseMap;
     }
-
-   
-    
 
 }
