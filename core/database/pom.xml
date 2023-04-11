@@ -46,6 +46,8 @@
             <version>${jackson.version}</version>            
             <type>jar</type>
         </dependency>
+         <!-- Fasterxml Jackson -->
+        
     </dependencies>
     
 </project>

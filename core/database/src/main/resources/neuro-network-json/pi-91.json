@@ -1,0 +1,56 @@
+{
+  "name" : "ТЕСТОВАЯ НЕЙРОННАЯ СЕТЬ для групп ПИ-91",
+  "uid" : "d467a797-c62d-4f1c-9900-958e5d7fb610",
+  "layerMap" : {
+    "0" : {
+      "layaerNumber" : 0,
+      "neuronCount" : 0,
+      "uid" : "596d73ff-a375-489a-88f5-3a1f5665f856",
+      "neuronList" : [ ],
+      "inputSynapsesIdList" : [ ],
+      "outputSynapsesIdList" : [ "42f0fe1f-1ca3-449d-914b-2f4f7a7da519", "7092e18b-e52b-4c3a-8637-2cc2ec5931b9", "d1110064-b956-4a78-a15d-6c7169e754bc" ],
+      "vector" : {
+        "uid" : "7a9c17bd-cd84-4f14-b6bb-5e9067e358e8",
+        "size" : 3,
+        "data" : [ -0.3, 3.1, 0.5 ],
+        "dataIndexUidMap" : {
+          "0" : "4dc87ae8-ac69-4bb2-a217-b6642e6fd1bf",
+          "1" : "761499b8-f2e1-43be-a13d-7d2192bf8b5b",
+          "2" : "ce0f74d0-fd1b-4c4b-a57f-0fd4c2a5301b"
+        }
+      }
+    },
+    "1" : {
+      "layaerNumber" : 1,
+      "neuronCount" : 1,
+      "uid" : "11064d94-cc4b-46b1-9ca2-e392566fef3e",
+      "neuronList" : [ {
+        "uid" : "d4d2d5cc-7331-440e-8c59-1ad03a80e2a9",
+        "output" : null
+      } ],
+      "inputSynapsesIdList" : [ ],
+      "outputSynapsesIdList" : [ "42f0fe1f-1ca3-449d-914b-2f4f7a7da519", "7092e18b-e52b-4c3a-8637-2cc2ec5931b9", "d1110064-b956-4a78-a15d-6c7169e754bc" ],
+      "vector" : null
+    }
+  },
+  "synapseMap" : {
+    "7092e18b-e52b-4c3a-8637-2cc2ec5931b9" : {
+      "uid" : "7092e18b-e52b-4c3a-8637-2cc2ec5931b9",
+      "w" : 0.8895097568656203,
+      "inputUid" : "761499b8-f2e1-43be-a13d-7d2192bf8b5b",
+      "outputUid" : "d4d2d5cc-7331-440e-8c59-1ad03a80e2a9"
+    },
+    "42f0fe1f-1ca3-449d-914b-2f4f7a7da519" : {
+      "uid" : "42f0fe1f-1ca3-449d-914b-2f4f7a7da519",
+      "w" : -0.29672191040547613,
+      "inputUid" : "4dc87ae8-ac69-4bb2-a217-b6642e6fd1bf",
+      "outputUid" : "d4d2d5cc-7331-440e-8c59-1ad03a80e2a9"
+    },
+    "d1110064-b956-4a78-a15d-6c7169e754bc" : {
+      "uid" : "d1110064-b956-4a78-a15d-6c7169e754bc",
+      "w" : 0.9936385685924614,
+      "inputUid" : "ce0f74d0-fd1b-4c4b-a57f-0fd4c2a5301b",
+      "outputUid" : "d4d2d5cc-7331-440e-8c59-1ad03a80e2a9"
+    }
+  }
+}

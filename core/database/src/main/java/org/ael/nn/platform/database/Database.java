@@ -17,8 +17,11 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.nio.charset.Charset;
 import org.ael.nn.planform.core.network.Network;
+import org.ael.nn.planform.core.neuron.Neuron;
 import org.ael.nn.platform.connection.Synapse;
 import org.ael.nn.platform.layer.Layer;
+import org.ael.nn.platform.matrix.Matrix;
+import org.ael.nn.platform.vector.Vector;
 
 /**
  *
@@ -26,18 +29,33 @@ import org.ael.nn.platform.layer.Layer;
  */
 public class Database {
 
+    
+    /**
+     * Создание экземпляра клсса, настройка библиотеки jackson json
+     */
     private static ObjectMapper mapper = JsonMapper.builder()
-            .addModule(new ParameterNamesModule())
-            .addModule(new Jdk8Module())
-            .addModule(new JavaTimeModule())
-            .registerSubtypes(Network.class)
+            .addModule(new ParameterNamesModule())  // подключение модулей
+            .addModule(new Jdk8Module())            // подключение модулей    
+            .addModule(new JavaTimeModule())        // подключение модулей
+            .registerSubtypes(Network.class)        // Регистрация классов
+            .registerSubtypes(Neuron.class)
             .registerSubtypes(Layer.class)
             .registerSubtypes(Synapse.class)
+            .registerSubtypes(Vector.class)
+            .registerSubtypes(Matrix.class)
+            
             .enable(SerializationFeature.INDENT_OUTPUT)
             .build();
 
-     public static void writeNerworkToFile(Network network, File file) {
+    
+    /**
+     * Сохранение нейросети в файле 
+     * @param network
+     * @param file 
+     */
+    public static void writeNerworkToFile(Network network, File file) {
         try {
+            // Проверка наличия файла
             if (file.exists()) {
                 file.delete();
                 System.out.println("Удален файл: " + file.getAbsolutePath());
@@ -60,16 +78,21 @@ public class Database {
             System.out.println(error);
 
         }
-
     }
     
     
-    public static void readNerworkFromFile(File file) {
+    /**
+     * Чтение нейросети из файла
+     * @param file 
+     */ 
+    public static Network readNerworkFromFile(File file) {
+        
+        Network network = null;
         
         if (file.exists()) {
                 try {
                     InputStreamReader input = new InputStreamReader(new FileInputStream(file), Charset.forName("UTF-8").newDecoder());
-                    Network network = mapper.readValue(input, Network.class);
+                    network = mapper.readValue(input, Network.class);
                     if (network != null) {                        
                         StringBuilder sb = new StringBuilder();
                         sb.append("\n");
@@ -90,6 +113,7 @@ public class Database {
             System.out.println(error);                        
         }
        
+        return network;
     }
     
    
