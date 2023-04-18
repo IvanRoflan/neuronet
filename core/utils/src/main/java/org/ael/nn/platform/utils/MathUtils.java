@@ -20,6 +20,31 @@ public class MathUtils {
         return x*2;
     }
 
+    /**
+     * Метод для рассчета расстояния между векторами
+     * 
+     * @param u Первый вектор
+     * @param v Второй вектор
+     * @return Расстояние между векторами
+     */
+    public static double calculateVectorDistance(double[] u, double[] v) {
+        // Проверяем размеры векторов
+        if (u.length != v.length) {
+            throw new IllegalArgumentException("Вектора должны быть одинаковой размерности");
+        }
+        // Создаем переменную для сумм квадратов
+        double sumOfSquares = 0.0;
+        for (int i = 0; i < u.length; i++) {
+            // Считаем разницу между элментами векторов
+            double diff = u[i] - v[i];
+            // Возсодим разницу в квадрат и суммируем к остальным
+            sumOfSquares += diff * diff;
+        }
+
+        // Возвращаем корень из суммы разниц
+        return Math.sqrt(sumOfSquares);
+    }
+
     
     /**
      * Умножение матрицы на константу
@@ -29,10 +54,13 @@ public class MathUtils {
      * @return 
      */
     public static Double [][] matrixMultiplicationByConstant(Double [][] matrix, Double a) {
+        // Инициализируем переменную для хранения результата (размер - такой же как у входящей матрицы)
         Double [][] result = new Double[matrix.length][matrix[0].length];
-        
+        // Проходим по строкам матрицы
         for (int i = 0; i < matrix.length; i++) {
+            // Проходям по столбцам матрицы
             for (int j = 0; j < matrix[i].length; j++) {
+                // Умножаем каждый элемент матрицы на константу
                 result[i][j] = a * matrix[i][j];
             }
         }
@@ -48,13 +76,19 @@ public class MathUtils {
      * @return 
      */
     public static Double [] matrixMultiplicationByVector(Double[][] matrix, Double[] vector) {
+        // Инициализируем переменную для результата (размер - кол-во строк матрицы)
         Double [] result = new Double[matrix.length];
         if (matrix[0].length == vector.length) {
+            // Если кол-во столбцов матрицы = длине вектора то обходим каждую строку матрицы
             for (int i = 0; i < matrix.length; i++) {
+                // Создаем переменную для хранения нового элемента
                 Double v = 0.0;
+                // ОБходим элементы вектора
                 for (int j = 0; j < vector.length; j++) {
+                    // Умножаем кажый элемент строки матрицы на каждый элемент вектора и записываем в переменныю
                     v += matrix[i][j] * vector[j];
                 }
+                // Записываем получившееся число в итоговый массив
                 result[i] = v;
             }
         } else {
@@ -71,14 +105,14 @@ public class MathUtils {
      * @param vector
      * @return
      */
-    public static Double[] vectorByMatrixMultiplication(double[] vector, double[][] matrix) {
+    public static double[] vectorByMatrixMultiplication(double[] vector, double[][] matrix) {
         // Выходной вектор
-        Double[] result = new Double[matrix[0].length];
+        double[] result = new double[matrix[0].length];
 
         System.out.println("Количесвто строк: " + matrix.length);
         System.out.println("Количесвто столбцов: " + matrix[0].length);
 
-        Double sum = 0.0;
+        double sum = 0.0;
         for (int i = 0; i < matrix.length; i++) {
 
             for (int j = 0; j < matrix[0].length; j++) {
@@ -112,9 +146,14 @@ public class MathUtils {
      * @return
      */
     public static Double[][] matrixMultiply(Double[][] a, Double[][] b) {
+        // Кол-во строк первой матрицы
         int rows = a.length;
+        // Кол-во столбцов второй матрицы
         int columns = b[0].length;
+
+        // Создаем переменную для итоговой матрицы
         Double[][] result = new Double[rows][columns];
+
         if (rows == columns) {
 
             for (int row = 0; row < rows; row++) {

@@ -141,7 +141,7 @@ public class MathUtilsTest {
             
         };
        
-        Double[] result = MathUtils.vectorByMatrixMultiplication( vector, a);
+        double[] result = MathUtils.vectorByMatrixMultiplication( vector, a);
 
 
         System.out.println("Вывод полученного вектора: \n");
@@ -149,6 +149,19 @@ public class MathUtilsTest {
             System.out.print(result[i] + " ");
         }
         System.out.println("Тест завершен");
+    }
+
+    @Test(priority = 6, groups = {"platform-core"})
+    public void calculateVectorsDistance() {
+        System.out.println("Начало теста рассчета расстояния между векторами");
+        double[] u = { 2.4, 1.6, 0.2};
+        double[] v = { 4.1, 1.1, 3.9};
+
+        double result = 4.1024; 
+        System.out.println("Предполагаемый результат = " + result);
+
+        double test = MathUtils.calculateVectorDistance(u, v);
+        System.out.println("Полученный результат = " + test);
     }
 
     
