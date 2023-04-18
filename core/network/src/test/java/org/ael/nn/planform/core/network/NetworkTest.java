@@ -151,6 +151,39 @@ public class NetworkTest {
         System.out.println(layer1);
         System.out.println(layer2);
     }
+
+    /**
+     * Рассчет выхода нейросети
+     */
+    @Test(priority = 5, groups = {"platform-core"})
+    public void networkOutputTest() {
+        Network network = new Network();
+
+        // Создание входного векторного слоя
+        double[] data = {-0.3, 3.1, 0.5};
+        Vector v = new Vector(data);
+        Layer layer1 = new Layer(0, v);
+
+        // Создание слоя нейронов
+        Layer layer2 = new Layer(1, 2);
+
+        // Создание выходного векторного слоя
+        double[] output = {-0.6, 2.0};
+        network.setExpectedOutput(new Vector(output));
+        Vector vector = new Vector(output);
+        Layer layer3 = new Layer(2, vector);
+
+        // Добавление и подключение слоев
+        network.addLayer(layer1);
+        network.addLayer(layer2);
+        network.connectLayers(layer1.getLayaerNumber(),layer2.getLayaerNumber());
+        network.addLayer(layer3);
+        network.connectLayers(layer2.getLayaerNumber(),layer3.getLayaerNumber());
+
+        // Расчет выхода нейросети
+        network.calculate();
+
+    }
     
     
 }

@@ -50,9 +50,13 @@ public class Layer {
      */
     private final List <String> outputSynapsesIdList = new ArrayList<>();
     
+    /**
+     * Выход слоя
+     */
+    private Vector outputValues;
     
     
-    
+
     /**
      * Вектор, содержащийсвя в слое
      */
@@ -72,6 +76,7 @@ public class Layer {
      */
     public Layer(Integer layaerNumber, Integer neuronCount) {
 
+        // Задаем слою уникальный идентиикатор
         this.uid = UUID.randomUUID().toString();
         System.out.println("\nФормирование слоя нейронной сети...");
         System.out.println("Параметры слоя: ");
@@ -79,12 +84,14 @@ public class Layer {
         System.out.println(String.format("%-25s %s", "Номер слоя:", "["+layaerNumber+"]"));
         System.out.println(String.format("%-25s %s", "Количесвто нейронов:", ""+neuronCount));
         
+        // Задаем слою его порядковый номер в сети и кол-во нейронов
         this.layaerNumber = layaerNumber;
         this.neuronCount = neuronCount;
 
         if (layaerNumber != null && layaerNumber >= 0) {
             // Проверка указания числа нейронов
             if (neuronCount != null && neuronCount != 0) {
+                // Создаем нейроны с помощью цикла и добавляем в список нейронов
                 for (int i = 0; i < neuronCount; i++) {
                     Neuron n = new Neuron();
                     neuronList.add(n);
@@ -107,6 +114,7 @@ public class Layer {
      * @param layaerNumber
      */
     public Layer(Integer layaerNumber, Vector vector) {
+        // Присваиваем вектор, порядковый номер и идентификатор слою
         this.vector = vector;
         this.layaerNumber = layaerNumber;
         this.uid = UUID.randomUUID().toString();
@@ -122,7 +130,9 @@ public class Layer {
     
     
     
-
+    /*
+     * Метод для вывода информации о слое
+     */
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -167,7 +177,17 @@ public class Layer {
     }
 
     
-    
+    public Vector getOutputValues() {
+        return outputValues;
+    }
+
+
+
+
+    public void setOutputValues(Vector v) {
+        this.outputValues = v;
+    }
+
     public Vector getVector() {
         return vector;
     }
