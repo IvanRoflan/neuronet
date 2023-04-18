@@ -9,7 +9,7 @@ package org.ael.nn.platform.matrix;
  */
 public class Matrix {
 
-    private double[][] data;
+    private double[][] data;      // Данные матрицы
     
     private final int rows;       // Количество  строк
     private final int columns;    // Количество столбцов
@@ -19,7 +19,9 @@ public class Matrix {
     // массива
     public Matrix(double[][] data) {
         this.data = data;
+        // Устанавливаем кол-во строк матрицы = длине двумерного массива
         this.rows = data.length;
+        // Устанавливаем кол-во столбцов матрцы = длине первого элемента двумерного массива
         this.columns = data[0].length;
     }
 
@@ -30,6 +32,7 @@ public class Matrix {
         data = new double[rows][columns];
         this.rows = rows;
         this.columns = columns;
+        // Заполняем матрицу случайными числами
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < columns; j++) {
                 data[i][j] = Math.random() * 2 - 1;
@@ -56,7 +59,7 @@ public class Matrix {
     }
 
    
-
+    // Метод вывода матрицы
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();

@@ -51,12 +51,15 @@ public class DataLoader {
                 index++;
                 while (scanner.hasNextLine()) {
                     index++;
+                    // Получаем строку
                     String s = scanner.nextLine();
                     if (!s.isEmpty()) {
                         filled++;
                         System.out.println(String.format("%-7s ==> %s", "[" + index + "]", s));
+                        // Если строка не пустая - получаем из неё вектор с помощью readVectorromString()
                         Vector vectorFromString = readVectorFromString(s, len, index);
                         if (vectorFromString != null) {
+                            // Если получилось достать вектор добавляем в список векторов
                             vectorList.add(vectorFromString);
                             System.out.println("Добавлен вектор :" + vectorFromString.getUid());
                         }
@@ -86,27 +89,34 @@ public class DataLoader {
      * @return
      */
     private Vector readVectorFromString(String s, int len, int strIndex) {
+        // Инициализируем переменную под вектор
         Vector vector = null;
 
+        // Разделяем строку на токены
         StringTokenizer st = new StringTokenizer(s, ",");
 
         System.out.println("Строка [" + strIndex + "] имеет [" + st.countTokens() + "]  токенов");
         if (st.countTokens() == len) {
+            // Инициализируем массив под вектор размером с len
             double[] v = new double[len];
 
             int index = -1;
             while (st.hasMoreTokens()) {
+                // Пока есть токены записываем их в строку str
                 String str = st.nextToken();
                 System.out.println("token: " + str.trim());
                 index++;
                 try {
+                    // Пытаемся перевести из строки в число double
                     Double d = Double.parseDouble(str.trim());
+                    // Полученное число добавляем в массив
                     v[index] = d;
                 } catch (NumberFormatException ex) {
                     System.out.println("Не удалось преобразовать токен: [" + str + "] в число формата " + Double.class.getSimpleName());
                 }
             }
 
+            // Создаем вектор на основе полученного массива
             vector = new Vector(v);
 
         } else {
@@ -125,14 +135,20 @@ public class DataLoader {
     private boolean checkIfFileExist(String path, String fileName) {
         boolean result = false;
 
+        // Проверяем что путь не пустой и не равен нулю
         if (path != null && !path.isEmpty()) {
+            // Проверяем что имя файла не поустое и не равно нулю
             if (fileName != null && !fileName.isEmpty()) {
                 System.out.println("Начало загрузки ...");
                 System.out.println(String.format("%-35s %s", "Каталог загрузки: ", path));
                 System.out.println(String.format("%-35s %s", "Файл: ", fileName));
+                // Записываем полный путь до файла конкатенацией строк
                 String fullPath = path + File.separator + fileName;
+                // СОздаем файл
                 file = new File(fullPath);
+
                 if (file.exists()) {
+                    // Если файл существует - возвращаем истину
                     System.out.println("Файл  [" + fileName + "] существует");
                     result = true;
                 } else {

@@ -29,7 +29,12 @@ public class Vector {
      * Объявление одномерного массива 
      */
     private double [] data;
+
+
     
+    /**
+     *  Карта, где ключ - индекс элемента вектора, значение - uid элемента вектора
+     */
     private final Map<Integer, String> dataIndexUidMap = new HashMap<>();
 
     public Vector() {
@@ -63,6 +68,10 @@ public class Vector {
    
     
 
+    /**
+     * Конструктор вектора, со случайными значениями элементов
+     * @param size Размерность вектора
+     */
     public Vector(Integer size) {
         this.uid = UUID.randomUUID().toString();
         if (size != null && size > 0) {
@@ -103,6 +112,9 @@ public class Vector {
         this.size = size;
     }
 
+    /*
+     * Вывод вектора
+     */
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
